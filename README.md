@@ -48,7 +48,9 @@ hit me up for a login
 ## Cole's notes
 When pushing to github from the Cloud9 terminal,
 switch to your own github username with the command:
-
+    
 git config user.name "putYourUserNameHere"
 
 Otherwise commits will not be under your name.
+
+To access the admin site use  username admin and password KN8uNrwKFQGk.

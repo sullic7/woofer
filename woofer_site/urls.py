@@ -16,17 +16,17 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-from woofer import views as woofer_views
+from woofer import views, user_views, dog_views, event_views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^$', woofer_views.index, name='home'),
-    url(r'^index$', woofer_views.index, name='index'),
-    url(r'^login$', woofer_views.login, name='login'),
-    url(r'^logout', woofer_views.logout_view, name='logout'),
-    url(r'^create_user', woofer_views.create_user, name='create-user'),
-    url(r'^index$', woofer_views.index),
-    url(r'^user_view$', woofer_views.user_view),
-    url(r'^dog_view$', woofer_views.dog_view),
-    url(r'^event_view$', woofer_views.event_view)
+    url(r'^$', views.index, name='home'),
+    url(r'^index$', views.index, name='index'),
+    url(r'^login$', user_views.login, name='login'),
+    url(r'^logout', user_views.logout_view, name='logout'),
+    url(r'^create_user', user_views.create_user, name='create-user'),
+    url(r'^index$', views.index),
+    url(r'^user_view$', user_views.user_view),
+    url(r'^dog_view$', dog_views.dog_view),
+    url(r'^event_view$', event_views.event_view)
 ]

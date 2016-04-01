@@ -12,7 +12,7 @@ class WooferUser(models.Model):
     birthday = models.DateField(auto_now=False, auto_now_add=False, null=True)
     # add photo
     
-class Dogs(models.Model):
+class Dog(models.Model):
     """ This is a model for dogs which are owned by one user. """
     name = models.CharField(max_length=100)
     owner = models.ForeignKey('WooferUser', on_delete=models.CASCADE)
@@ -40,7 +40,7 @@ class Dogs(models.Model):
     temperament_strangers = models.CharField(max_length=2, choices=TEMPERAMENT_CHOICES)
     # add photo
     
-class Events(models.Model):
+class Event(models.Model):
     """ This is a model for events created by one user. """
     name = models.CharField(max_length=50)
     user = models.ForeignKey('WooferUser', on_delete=models.CASCADE)
@@ -70,5 +70,5 @@ class Events(models.Model):
     
 class EventAttendance(models.Model):
     """ This is a model for dogs attending events. """
-    event_id = models.ForeignKey('Events', on_delete=models.CASCADE)
-    dog_id = models.ForeignKey('Dogs', on_delete=models.CASCADE)
+    event_id = models.ForeignKey('Event', on_delete=models.CASCADE)
+    dog_id = models.ForeignKey('Dog', on_delete=models.CASCADE)
