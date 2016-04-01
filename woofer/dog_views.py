@@ -12,4 +12,3 @@ def dog_view(request):
     dog = None
     
     return render(request, 'woofer/dog_profile.html', { 'dog' : dog })
-    
