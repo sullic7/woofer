@@ -7,9 +7,6 @@ class WooferUser(models.Model):
     """ This is a profile model of the django user model. More info here 
     https://docs.djangoproject.com/en/1.9/topics/auth/customizing/"""
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    first_name = models.CharField(max_length=100)
-    last_name = models.CharField(max_length=100)
-    email = models.EmailField(max_length=100)
     phone_number = models.IntegerField(null=True)
     zipcode = models.IntegerField()
     birthday = models.DateField(auto_now=False, auto_now_add=False, null=True)

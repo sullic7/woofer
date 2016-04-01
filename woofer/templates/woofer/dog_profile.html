@@ -3,8 +3,18 @@
 {% block page_title %}Woofer{% endblock %}
 
 {% block content %}
-    <p>Dog Profile</p>
     
-    <pr>{{ form }}</p>
+    <p>Dog Profile</p>
+    <p>Name: {{form.name}}</p>
+    <p>Owner: {{form.owner}}</p>
+    <p>Birthday: {{form.birthday}}</p>
+    <p>Weight: {{form.weight}}</p>
+    <p>Breed: {{form.breed}}</p>
+    <p>Potty Trained: {{form.potty_trained}}</p>
+    <p>Bio: {{form.bio}}</p>
+    <p>Activity: {{form.activity}}</p>
+    <p>Temperament Kids: {{form.temperament_kids}}</p>
+    <p>Temperament Dogs: {{form.temperament_dogs}}</p>
+    <p>Temperament Strangers: {{form.temperament_strangers}}</p>
     
 {% endblock %}

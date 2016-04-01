@@ -1,0 +1,16 @@
+{% extends 'woofer/pageframe.html' %}
+
+{% block page_title %}Woofer{% endblock %}
+
+{% block content %}
+  
+<form action="/create_user" method="post">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Submit" />
+</form>
+
+
+    
+    
+{% endblock %}

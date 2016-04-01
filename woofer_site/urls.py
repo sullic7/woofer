@@ -20,7 +20,11 @@ from woofer import views as woofer_views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^$', woofer_views.index),
+    url(r'^$', woofer_views.index, name='home'),
+    url(r'^index$', woofer_views.index, name='index'),
+    url(r'^login$', woofer_views.login, name='login'),
+    url(r'^logout', woofer_views.logout_view, name='logout'),
+    url(r'^create_user', woofer_views.create_user, name='create-user'),
     url(r'^index$', woofer_views.index),
     url(r'^user_view$', woofer_views.user_view),
     url(r'^dog_view$', woofer_views.dog_view),
