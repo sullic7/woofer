@@ -5,20 +5,16 @@
 {% block content %}
 
     <p>Create an Event</p>
-    <p>Name: {{form.name}}</p>
-    <p>User: {{form.user}}</p>
-    <p>Address: {{form.address}}</p>
-    <p>City: {{form.city}}</p>
-    <p>Zipcode: {{form.zipcode}}</p>
-    <p>Start Day: {{form.start_day}}</p>
-    <p>Start Time: {{form.start_time}}</p>
-    <p>Duration: {{form.duration}}</p>
-    <p>Description: {{form.description}}</p>
-    <p>Location: {{form.location}}</p>
-    <p>Activity: {{form.activity}}</p>
-    
-    
-    
-
+    <p>Name: {{ event.name }}</p>
+    <p>User: {{ event.user }}</p>
+    <p>Address: {{ event.address }}</p>
+    <p>City: {{ event.city }}</p>
+    <p>Zipcode: {{ event.zipcode }}</p>
+    <p>Start Day: {{ event.start_day }}</p>
+    <p>Start Time: {{ event.start_time }}</p>
+    <p>Duration: {{ event.duration }}</p>
+    <p>Description: {{ event.description }}</p>
+    <p>Location: {{ event.location }}</p>
+    <p>Activity: {{ event.activity }}</p>
     
 {% endblock %}

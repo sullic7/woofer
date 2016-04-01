@@ -7,10 +7,10 @@ from .forms import EventForm
 from .models import Event
 
 
-def event_view(request):
+def event_view(request, eventid):
     """ This is the view for the event details. """
     
-    event = None
+    event = Event.objects.get(id=eventid)
     
     return render(request, 'woofer/event_details.html', { 'event' : event })
     

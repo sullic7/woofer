@@ -1,12 +1,13 @@
 from django.shortcuts import render
-from django.contrib.auth import authenticate, logout
+from django.contrib.auth import authenticate, logout, login
 from django.contrib.auth.forms import UserCreationForm
 
 from django.http import HttpResponseRedirect
 from .forms import LoginForm
+from .models import WooferUser
 
 
-def login(request):
+def login_view(request):
     """ This is the view that is called when sumbitting the login form. 
     We authenticate the user here and log them inself.
     """
@@ -24,8 +25,8 @@ def login(request):
                                 password=form.cleaned_data['password'])
 
         if user is not None:
-            if user.is_active():
-                request.user = user
+            if user.is_active:
+                login(request, user)
                 return HttpResponseRedirect('/index')
             else:
                 message = "The password is valid, but the account has been disabled!"
@@ -69,10 +70,10 @@ def logout_view(request):
 
 
 
-def user_view(request):
+def user_view(request, userid):
     """ This is the view for the user details. """
     
-   user = None # replace me with a query!
+    user = WooferUser.objects.get(id=userid)
     
     return render(request, 'woofer/user_profile.html', { 'user' : user } )
     
