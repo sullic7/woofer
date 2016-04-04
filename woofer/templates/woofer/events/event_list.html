@@ -1,0 +1,51 @@
+{% extends 'woofer/pageframe.html' %}
+
+{% block page_title %}Event List{% endblock %}
+
+{% block scripts %}
+<script>
+window.onload = function () {
+  var options = {
+    valueNames: [ 'name', 'start_day' ],
+    page: 5,
+    plugins: [ ListPagination({}) ]
+  };
+  
+  var userList = new List('events', options);
+}
+</script>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="row">
+  <div id="events" class="col-mid-12 col-mid-offset-4">
+    <input class="search" placeholder="Search" />
+    <button class="sort" data-sort="name">Sort by name</button>
+    <button class="sort" data-sort="start_day">Sort by start day</button>
+    <button class="sort" data-sort="start_time">Sort by start time</button>
+  <table>
+  <thead>
+    <tr></tr>
+  </thead>
+  <tbody class="list">
+    {% for event in events %}
+      <tr>
+        <td class="name">{{ event.name }}</td>
+        <td class="start_day">{{ event.start_day }}</td>
+        <td class="start_time">{{ event.start_time }}</td>
+        <td class="duration">{{ event.duration }}</td>
+        <td class="city">{{ event.city }}</td>
+        <td class="activity">{{ event.activity }}</td>
+        <td class="location">{{ event.location }}</td>
+        <!-- Edit buttons -->
+        <td><a href="{% url 'edit-event' event.id %}" ><button class="">Edit<span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button></a></td>
+        <td><a href="{% url 'view-event' event.id %}" ><button class="">View<span class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span></button></a></td>
+      </tr>
+    {% endfor %}
+  </tbody>
+  </table>
+  <ul class="pagination"></ul>
+</div>
+
+{% endblock %}

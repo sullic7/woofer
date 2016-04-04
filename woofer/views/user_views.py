@@ -70,7 +70,7 @@ def logout_view(request):
     return render(request, 'woofer/index.html')
 
 
-def user_view(request, userid):
+def view_user(request, userid):
     """ This is the view for the user details. """
     user = Profile.objects.get(id = userid)
     # user = User.objects.get(id = userid) ??
@@ -98,5 +98,3 @@ def edit_user(request, userid):
             'message' : None,
             'form_action' : reverse('edit-user', args=[userid])
         } )
-    
-    

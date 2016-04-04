@@ -29,8 +29,7 @@ class CreateEventForm(ModelForm):
         model = Event
         exclude = ('user', )
         # We don't want these to be changed so hide them from the user
-        widgets = { 
-            'id' : forms.HiddenInput(),
+        widgets = {
             'user' : forms.HiddenInput()
         }
         

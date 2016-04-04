@@ -27,11 +27,11 @@ urlpatterns = [
     url(r'^login/$', user_views.login_view, name='login'),
     url(r'^logout/$', user_views.logout_view, name='logout'),
     url(r'^create_user/$', user_views.create_user, name='create-user'),
-    url(r'^view_user/(?P<userid>[0-9]+)/$', user_views.user_view),
+    url(r'^view_user/(?P<userid>[0-9]+)/$', user_views.view_user, name='view-user'),
     url(r'^edit_user/(?P<userid>[0-9]+)/$', user_views.edit_user, name='edit-user'),
     
     # Dog URLs
-    url(r'^dog_view/(?P<dogid>[0-9]+)/$', dog_views.dog_view),
+    url(r'^dog_view/(?P<dogid>[0-9]+)/$', dog_views.dog_view, name='view-dog'),
     # url(r'^add_dog/$', dog_views.edit_dog, name='add-dog'),
     url(r'^edit_dog/(?P<dogid>[0-9]+)/$', dog_views.edit_dog, name='edit-dog'),
     

@@ -18,16 +18,12 @@ def view_event(request, eventid):
     
 def view_event_list(request):
     """ This view provides a list of events not in the past sorted by their date. """
-    
     events = Event.objects.all()
-
     return render(request, 'woofer/events/event_list.html', { 'events' : events })
 
 @login_required
 def create_event(request):
     """ Displays a form for creating an event """
-    message = None
-    
     if request.method == 'POST':
         form = CreateEventForm(request.POST)
         if form.is_valid():
@@ -41,11 +37,10 @@ def create_event(request):
         
     return render(request, 'woofer/show_form.html', {
         'form' : form,
-        'message' : message,
         'form_action' : reverse('create-event')
     } )
 
-
+    
 def edit_event(request, eventid):
     """ Display and handel a form for editing events """
     if request.method == 'POST':
