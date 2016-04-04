@@ -52,7 +52,7 @@ class Event(models.Model):
     """ This is a model for events created by one user. """
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=50)
-    user = models.ForeignKey('Profile', on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     address = models.CharField(max_length=100)
     city = models.CharField(max_length=30)
     zipcode = models.IntegerField()

@@ -17,11 +17,17 @@ class DogForm(ModelForm):
         exclude = ('id','owner',)
         # fields = '__all__'
 
-class EventForm(ModelForm):
+class EditEventForm(ModelForm):
     """ Form for editing/creating and event. """
     class Meta:
         model = Event
         fields = '__all__'
+
+class CreateEventForm(ModelForm):
+    """ Form for editing/creating and event. """
+    class Meta:
+        model = Event
+        exclude = ('user', )
         # We don't want these to be changed so hide them from the user
         widgets = { 
             'id' : forms.HiddenInput(),
