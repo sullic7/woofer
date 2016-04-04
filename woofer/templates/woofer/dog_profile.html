@@ -3,18 +3,60 @@
 {% block page_title %}Woofer{% endblock %}
 
 {% block content %}
-    
-    <p>Dog Profile</p>
-    <p>Name: {{ dog.name }}</p>
-    <p>Owner: {{ dog.owner }}</p>
-    <p>Birthday: {{ dog.birthday }}</p>
-    <p>Weight: {{ dog.weight }}</p>
-    <p>Breed: {{ dog.breed }}</p>
-    <p>Potty Trained: {{ dog.potty_trained }}</p>
-    <p>Bio: {{ dog.bio }}</p>
-    <p>Activity: {{ dog.activity }}</p>
-    <p>Temperament Kids: {{ dog.temperament_kids }}</p>
-    <p>Temperament Dogs: {{ dog.temperament_dogs }}</p>
-    <p>Temperament Strangers: {{ dog.temperament_strangers }}</p>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="text-center">Dog Profile</h1>
+            </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <h4 class="text-center">Owner: {{ dog.owner }}</h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <p class="text-left">Name: {{ dog.name }}</p>
+        </div>
+        <div class="col-md-3">
+            <p class=text-center>Breed: {{ dog.breed }}</p>
+        </div>
+        <div class="col-md-3">
+            <p class="text-center">Activity: {{ dog.get_activity_display }}</p>
+        </div>
+        <div classs="col-md-3">
+            <p class="text-right">Weight: {{ dog.weight }}</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <p class="text-center">Picture of dog here</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <p class="text-center">Bio: {{ dog.bio}}</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <p class="text-left">Temperament Dogs: {{ dog.get_temperament_dogs_display }}</p>
+        </div>
+        <div class="col-md-4">
+            <p class="text-center">Temperament Kids: {{ dog.get_temperament_kids_display }}</p>
+        </div>
+        <div class="col-md-4">
+            <p class="text-right">Temperament Strangers: {{ dog.get_temperament_strangers_display }}</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <p class="text-left">Potty Trained: {{ dog.potty_trained }}</p>
+        </div>
+        <div class="col-md-6">
+            <p class="text-right">Birthday: {{ dog.birthday }}</p>
+        </div>
+    </div>
+</div>
     
 {% endblock %}

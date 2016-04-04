@@ -16,17 +16,22 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-from woofer import views, user_views, dog_views, event_views
+from woofer.views import home_views, user_views, dog_views, event_views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^$', views.index, name='home'),
-    url(r'^index$', views.index, name='index'),
-    url(r'^login$', user_views.login_view, name='login'),
-    url(r'^logout$', user_views.logout_view, name='logout'),
-    url(r'^create_user$', user_views.create_user, name='create-user'),
-    url(r'^index$', views.index),
-    url(r'^user_view$', user_views.user_view),
-    url(r'^dog_view$', dog_views.dog_view),
-    url(r'^event_view$', event_views.event_view)
+    url(r'^$', home_views.index, name='home'),
+    url(r'^index/$', home_views.index, name='index'),
+    url(r'^login/$', user_views.login_view, name='login'),
+    url(r'^logout/$', user_views.logout_view, name='logout'),
+    url(r'^create_user/$', user_views.create_user, name='create-user'),
+    url(r'^view_user/(?P<userid>[0-9]+)/$', user_views.user_view),
+    url(r'^edit_user/(?P<userid>[0-9]+)/$', user_views.edit_user, name='edit-user'),
+    url(r'^dog_view/(?P<dogid>[0-9]+)/$', dog_views.dog_view),
+    # url(r'^add_dog/$', dog_views.edit_dog, name='add-dog'),
+    url(r'^edit_dog/(?P<dogid>[0-9]+)/$', dog_views.edit_dog, name='edit-dog'),
+    url(r'^event_view/(?P<eventid>[0-9]+)/$', event_views.event_view, name='event-view'),
+    url(r'^event_list/$', event_views.view_event_list, name='event-list'),
+    url(r'^create_event/$', event_views.create_event, name='create-event')
+    
 ]

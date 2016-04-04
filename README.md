@@ -53,4 +53,4 @@ git config user.name "putYourUserNameHere"
 
 Otherwise commits will not be under your name.
 
-To access the admin site use  username admin and password KN8uNrwKFQGk.
+To access the admin site use  username admin and password KN8uNrwKFQGk.     

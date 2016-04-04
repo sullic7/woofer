@@ -3,8 +3,12 @@
 {% block page_title %}Woofer{% endblock %}
 
 {% block content %}
+
+{% if message %}
+    <h3>{{ message }}</h3> 
+{% endif %}
   
-<form action="/create_user" method="post">
+<form action="{{ form_action }}" method="post">
     {% csrf_token %}
     {{ form }}
     <input type="submit" value="Submit" />

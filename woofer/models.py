@@ -3,24 +3,27 @@ from __future__ import unicode_literals
 from django.db import models
 from django.contrib.auth.models import User
 
-class WooferUser(models.Model):
+class Profile(models.Model):
     """ This is a profile model of the django user model. More info here 
     https://docs.djangoproject.com/en/1.9/topics/auth/customizing/"""
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    phone_number = models.IntegerField(null=True)
-    zipcode = models.IntegerField()
-    birthday = models.DateField(auto_now=False, auto_now_add=False, null=True)
+    user = models.OneToOneField(User)
+    phone_number = models.IntegerField(blank=True, null=True)
+    zipcode = models.IntegerField(blank=True, null=True)
+    birthday = models.DateField(auto_now=False, auto_now_add=False, blank=True, null=True)
     # add photo
+    
+    def __str__(self):
+        return self.user.username
     
 class Dog(models.Model):
     """ This is a model for dogs which are owned by one user. """
     name = models.CharField(max_length=100)
-    owner = models.ForeignKey('WooferUser', on_delete=models.CASCADE)
-    birthday = models.DateField(auto_now=False, auto_now_add=False, null=True)
-    weight = models.IntegerField(null=True)
-    breed = models.CharField(max_length=100)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE)
+    birthday = models.DateField(auto_now=False, auto_now_add=False, blank=True, null=True)
+    weight = models.IntegerField(blank=True, null=True)
+    breed = models.CharField(max_length=100, blank=True, null=True)
     potty_trained = models.BooleanField()
-    bio = models.TextField(null=True)
+    bio = models.TextField(blank=True, null=True)
     LOW = 'LO'
     MEDIUM = 'MD'
     HIGH = 'HI'
@@ -40,10 +43,13 @@ class Dog(models.Model):
     temperament_strangers = models.CharField(max_length=2, choices=TEMPERAMENT_CHOICES)
     # add photo
     
+    def __str__(self):
+        return self.name
+    
 class Event(models.Model):
     """ This is a model for events created by one user. """
     name = models.CharField(max_length=50)
-    user = models.ForeignKey('WooferUser', on_delete=models.CASCADE)
+    user = models.ForeignKey('Profile', on_delete=models.CASCADE)
     address = models.CharField(max_length=100)
     city = models.CharField(max_length=30)
     zipcode = models.IntegerField()
@@ -67,6 +73,9 @@ class Event(models.Model):
             (HIGH, 'Very active')
         )
     activity = models.CharField(max_length=2, choices=ACTIVITY_CHOICES)
+    
+    def __str__(self):
+        return self.name
     
 class EventAttendance(models.Model):
     """ This is a model for dogs attending events. """

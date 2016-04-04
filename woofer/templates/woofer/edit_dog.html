@@ -3,20 +3,19 @@
 {% block page_title %}Woofer{% endblock %}
 
 {% block content %}
-  
+    
 {% if message %}
 <h3>{{ message }}</h3> 
 {% endif %}
   
-<form action="/login/" method="post">
+<form action="/edit_dog" method="post">
     {% csrf_token %}
     {{ form }}
     <input type="submit" value="Submit" />
 </form>
 
-
-
-<a href="{% url 'create-user' %}"><button type="button" class="btn btn-default">Create New Account</button></a>
-    
+<!--{% if True %}-->
+<a href="{% url 'edit-dog' dog.id %}"><button type="button" class="btn btn-default">Save</button></a>
+<!--{% endif %}-->
     
 {% endblock %}

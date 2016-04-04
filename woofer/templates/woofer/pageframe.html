@@ -13,9 +13,17 @@
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
 
+    <!-- Load bootstrap CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <!-- List.js and List.pagination.js are used for displaying events -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/list.js/1.2.0/list.min.js"></script>
+    <script src="{% static "javascript/list.pagination.min.js" %}"></script>
+    <!--Load our own style sheet-->
     <link href="{% static "css/main.css" %}" rel="stylesheet" type="text/css"/>
-    <script src="{% static "css/main.css" %}"></script>
+    
+    <!-- Scripts specefic to a page go here -->
+    {% block scripts %}{% endblock %}
+    
   </head>
 
   <body>
@@ -38,11 +46,11 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li><a href="{% url 'index' %}">Home</a></li>
-        <li><a href="#">Search Events</a></li>
-        <li><a href="#">Create Event</a></li>
+        <li><a href="{% url 'event-list' %}">Search Events</a></li>
+        <li><a href="{% url 'create-event' %}">Create Event</a></li>
         
         {% if request.user.is_authenticated %}
-          <li><p>Welcome {{ user.username }}</p></li>
+          <li><p>Welcome {{ user.username }} your userid is {{ user.id }}</p></li>
           <li><a href="#">View Profile</a></li>
           <li><a href="{% url 'logout' %}">Logout</a></li>
         {% else %}

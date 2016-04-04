@@ -2,12 +2,47 @@
 
 {% block page_title %}Event List{% endblock %}
 
-{% block content %}
+{% block scripts %}
+<script>
+window.onload = function () {
+  var options = {
+    valueNames: [ 'name', 'start_day' ],
+    page: 2,
+    plugins: [ ListPagination({}) ] 
+  };
+  
+  var userList = new List('events', options);
+}
+</script>
+{% endblock %}
 
-  <ul>
+{% block content %}
+<div class="container">
+  <div class="row">
+  <div id="events" class="col-mid-12 col-mid-offset-4">
+    <input class="search" placeholder="Search" />
+  </div>
+</div>
+  <button class="sort" data-sort="name">
+    Sort by name
+  </button>
+  
+  <table>
+  <thead>
+    <tr></tr>
+  </thead>
+  <tbody class="list">
     {% for event in events %}
-      <li>{{ event.name }}</li>
+      <tr>
+        <td class="name">{{ event.name }}</td>
+        <td class="start_day">{{ event.start_day }}</td>
+        <td><a href="#" ><button class="">Edit<span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button></a></td>
+        <td><a href="{% url 'event-view' event.id %}" ><button class="">View<span class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span></button></a></td>
+      </tr>
     {% endfor %}
-  </ul>
-    
+  </tbody>
+  </table>
+  <ul class="pagination"></ul>
+</div>
+
 {% endblock %}
