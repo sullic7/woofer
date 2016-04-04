@@ -21,7 +21,12 @@ class EventForm(ModelForm):
     """ Form for editing/creating and event. """
     class Meta:
         model = Event
-        exclude = ('id',)
+        fields = '__all__'
+        # We don't want these to be changed so hide them from the user
+        widgets = { 
+            'id' : forms.HiddenInput(),
+            'user' : forms.HiddenInput()
+        }
         
 class ProfileForm(ModelForm):
     """ Form for editing and creating user woofer profiles """

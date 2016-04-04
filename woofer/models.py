@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 class Profile(models.Model):
     """ This is a profile model of the django user model. More info here 
     https://docs.djangoproject.com/en/1.9/topics/auth/customizing/"""
+    id = models.AutoField(primary_key=True)
     user = models.OneToOneField(User)
     phone_number = models.IntegerField(blank=True, null=True)
     zipcode = models.IntegerField(blank=True, null=True)
@@ -17,6 +18,7 @@ class Profile(models.Model):
     
 class Dog(models.Model):
     """ This is a model for dogs which are owned by one user. """
+    id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=100)
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     birthday = models.DateField(auto_now=False, auto_now_add=False, blank=True, null=True)
@@ -48,6 +50,7 @@ class Dog(models.Model):
     
 class Event(models.Model):
     """ This is a model for events created by one user. """
+    id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=50)
     user = models.ForeignKey('Profile', on_delete=models.CASCADE)
     address = models.CharField(max_length=100)
@@ -79,5 +82,6 @@ class Event(models.Model):
     
 class EventAttendance(models.Model):
     """ This is a model for dogs attending events. """
+    id = models.AutoField(primary_key=True)
     event_id = models.ForeignKey('Event', on_delete=models.CASCADE)
     dog_id = models.ForeignKey('Dog', on_delete=models.CASCADE)
