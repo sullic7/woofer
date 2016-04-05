@@ -8,8 +8,8 @@ from models import Profile, Dog, Event, EventAttendance
 from django.contrib.auth.forms import UserChangeForm
 
 class LoginForm(forms.Form):
-    username = forms.CharField(label='Username1', max_length=100)
-    password = forms.CharField(label='Password2', widget=forms.PasswordInput, max_length=100)
+    username = forms.CharField(label='Username', max_length=100)
+    password = forms.CharField(label='Password', widget=forms.PasswordInput, max_length=100)
 
 class DogForm(ModelForm):
     """ Form for adding/editing a dog profile. """

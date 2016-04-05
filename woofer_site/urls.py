@@ -31,7 +31,8 @@ urlpatterns = [
     url(r'^edit_user/(?P<userid>[0-9]+)/$', user_views.edit_user, name='edit-user'),
     url(r'^edit_profile/(?P<userid>[0-9]+)/$', user_views.edit_profile, name='edit-profile'),
     url(r'^view_profile/$', user_views.view_profile, name='view-profile'),  
-    url(r'^view_profile/(?P<userid>[0-9]+)/$', user_views.view_profile, name='view-profile'),  
+    url(r'^view_profile/(?P<userid>[0-9]+)/$', user_views.view_profile, name='view-profile'),
+    url(r'^change_password/$', user_views.change_password, name='change-password'),
     
     # Dog URLs
     url(r'^add_dog/$', dog_views.add_dog, name='add-dog'),

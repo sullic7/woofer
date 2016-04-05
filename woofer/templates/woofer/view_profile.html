@@ -29,6 +29,7 @@ window.onload = function () {
     <p>Last Name: {{ profile.user.last_name }}</p>
     <p>Email: {{ profile.user.email }}</p>
     <a href="{% url 'edit-user' profile.user.id %}" ><button class="">Edit<span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button></a>
+    <a href="{% url 'change-password' %}" ><button class="">Change Password<span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button></a>
     
     <h3>Profile Information</h3>
     <p>Phone Number: {{ profile.phone_number }}</p>

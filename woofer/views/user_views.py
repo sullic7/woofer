@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.contrib.auth import authenticate, logout, login
-from django.contrib.auth.forms import UserCreationForm, UserChangeForm
+from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
@@ -23,7 +23,6 @@ def login_view(request):
         
         # if the form validation passed try to authenticate the user
         if form.is_valid():
-            print("form is valid.")
             user =  authenticate(username=form.cleaned_data['username'],
                                 password=form.cleaned_data['password'])
 
@@ -117,7 +116,6 @@ def edit_user(request, userid):
             user.save()
             return HttpResponseRedirect(reverse('view-profile', args=[userid]))
     else:
-        # populate the form with the values in the internal dict of the user object
         form = UserDetailsForm(instance = request.user)
         
         return render(request, 'woofer/show_form.html', { 
@@ -143,7 +141,6 @@ def edit_profile(request, userid):
             new_profile.save()
             return HttpResponseRedirect(reverse('view-profile', args=[userid]))
     else:
-        # populate the form with the values in the internal dict of the user object
         form = ProfileForm(instance = current_profile)
         
         return render(request, 'woofer/show_form.html', { 
@@ -151,3 +148,22 @@ def edit_profile(request, userid):
             'message' : None,
             'form_action' : reverse('edit-profile', args=[userid])
         } )
+
+def change_password(request):
+    """ This view displays and handels an edit password form. """
+
+    if request.method == 'POST':
+        form = PasswordChangeForm(user = request.user, data=request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('view-profile', args=[request.user.id]))
+        else:
+            print("form not valid")
+    else:
+        form = PasswordChangeForm(user = request.user)
+        
+    return render(request, 'woofer/show_form.html', { 
+        'form' : form,
+        'message' : None,
+        'form_action' : reverse('change-password')
+    } )
