@@ -45,6 +45,7 @@ def edit_dog(request, dogid):
             # so if we don't manually update the id it will insert a new object
             new_dog = form.save(commit=False)
             new_dog.id = dogid
+            new_dog.owner = request.user
             new_dog.save()
             
             return HttpResponseRedirect(reverse('view-dog', args=[dogid]))
