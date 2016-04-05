@@ -7,7 +7,7 @@ from django.contrib.auth.decorators import login_required
 
 from django.http import HttpResponseRedirect
 from ..forms import LoginForm, ProfileForm
-from ..models import Profile
+from ..models import Profile, Dog
 
 
 def login_view(request):
@@ -71,8 +71,7 @@ def create_user(request):
 @login_required
 def view_profile(request):
     """ Redirect the user to the view user screen for their userid. """
-    profile = Profile.objects.get(user = request.user)
-    return HttpResponseRedirect(reverse('view-user', args=[profile.id]))
+    return HttpResponseRedirect(reverse('view-user', args=[request.user.id]))
 
 def logout_view(request):
     """ This view handels loggign the user out. """
@@ -82,9 +81,15 @@ def logout_view(request):
 
 def view_user(request, userid):
     """ This is the view for the user details. """
-    user = Profile.objects.get(id = userid)
-    # user = User.objects.get(id = userid) ??
-    return render(request, 'woofer/user_profile.html', { 'user' : user } )
+    user_to_view = User.objects.get(id = userid)
+    profile = Profile.objects.get(user = user_to_view)
+    dogs = Dog.objects.all().filter(owner = user_to_view)
+
+    return render(request, 'woofer/view_user.html', 
+    { 
+        'profile' : profile,
+        'dogs' : dogs
+    } )
 
     
 def edit_user(request, userid):
