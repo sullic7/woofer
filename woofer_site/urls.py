@@ -29,11 +29,13 @@ urlpatterns = [
     url(r'^create_user/$', user_views.create_user, name='create-user'),
     url(r'^view_user/(?P<userid>[0-9]+)/$', user_views.view_user, name='view-user'),
     url(r'^edit_user/(?P<userid>[0-9]+)/$', user_views.edit_user, name='edit-user'),
+    url(r'^edit_profile/(?P<userid>[0-9]+)/$', user_views.edit_profile, name='edit-profile'),
     url(r'^view_profile/$', user_views.view_profile, name='view-profile'),  
+    url(r'^view_profile/(?P<userid>[0-9]+)/$', user_views.view_profile, name='view-profile'),  
     
     # Dog URLs
-    url(r'^dog_view/(?P<dogid>[0-9]+)/$', dog_views.dog_view, name='view-dog'),
     url(r'^add_dog/$', dog_views.add_dog, name='add-dog'),
+    url(r'^dog_view/(?P<dogid>[0-9]+)/$', dog_views.dog_view, name='view-dog'),
     url(r'^edit_dog/(?P<dogid>[0-9]+)/$', dog_views.edit_dog, name='edit-dog'),
     
     # Event URLs
