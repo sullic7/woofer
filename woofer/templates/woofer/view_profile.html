@@ -11,7 +11,7 @@ window.onload = function () {
     plugins: [ ListPagination({}) ]
   };
   
-  var userList = new List('events', options);
+  var dogList = new List('dogs', options);
 }
 </script>
 {% endblock %}
@@ -23,13 +23,19 @@ window.onload = function () {
   </div>
   
   <div class="panel-body">
+    <h3>User Information</h3>
     <p>Username: {{ profile.user.username }}</p>
     <p>First Name: {{ profile.user.first_name }}</p>
     <p>Last Name: {{ profile.user.last_name }}</p>
     <p>Email: {{ profile.user.email }}</p>
+    <a href="{% url 'edit-user' profile.user.id %}" ><button class="">Edit<span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button></a>
+    <a href="{% url 'change-password' %}" ><button class="">Change Password<span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button></a>
+    
+    <h3>Profile Information</h3>
     <p>Phone Number: {{ profile.phone_number }}</p>
     <p>Zipcode: {{ profile.zipcode }}</p>
     <p>Birthday: {{ profile.birthday }}</p>
+    <a href="{% url 'edit-profile' profile.user.id %}" ><button class="">Edit<span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button></a>
   </div>
 </div>
 
@@ -55,6 +61,7 @@ window.onload = function () {
               <td class="birthday">{{ dog.birthday }}</td>
               <td class="breed">{{ dog.breed }}</td>
               <!-- Edit buttons -->
+              <td><a href="{% url 'edit-dog' dog.id %}" ><button class="">Edit<span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button></a></td>
               <td><a href="{% url 'view-dog' dog.id %}" ><button class="">View<span class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span></button></a></td>
             </tr>
           {% endfor %}

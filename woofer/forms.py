@@ -5,10 +5,11 @@ from django import forms
 from django.contrib.auth.models import User
 from django.forms import ModelForm
 from models import Profile, Dog, Event, EventAttendance
+from django.contrib.auth.forms import UserChangeForm
 
 class LoginForm(forms.Form):
-    username = forms.CharField(label='Username1', max_length=100)
-    password = forms.CharField(label='Password2', widget=forms.PasswordInput, max_length=100)
+    username = forms.CharField(label='Username', max_length=100)
+    password = forms.CharField(label='Password', widget=forms.PasswordInput, max_length=100)
 
 class DogForm(ModelForm):
     """ Form for adding/editing a dog profile. """
@@ -52,4 +53,9 @@ class ProfileForm(ModelForm):
     """ Form for editing and creating user woofer profiles. """
     class Meta:
         model = Profile
-        fields = '__all__'
+        exclude = ('user', )
+        
+class UserDetailsForm(ModelForm):
+    class Meta:
+        model = User
+        fields = ['first_name', 'last_name', 'email']

@@ -1,16 +1,23 @@
 from django.shortcuts import render
-from django.contrib.auth import authenticate, logout
-from django.contrib.auth.forms import UserCreationForm
 
-from django.http import HttpResponseRedirect
-
+from ..models import Event, EventAttendance, Dog
 
 def index(request):
-    """ I'm a doc string and every method should have me. I tell you what
-    I do. In this case I'm the index."""
+    """ Display the home page. If the user is logged in display a list of
+    the events they own and a list of events their attending.
+    """
+    owned_events = None
+    attending_events = None
     
-    some_words = "you can pass data to a templte form a view like this!"
+    if request.user.is_authenticated:
+        owned_events = Event.objects.all().filter(user = request.user)
+        
+        owned_dog_ids = Dog.objects.all().filter(owner = request.user)
+        attending_event_ids = EventAttendance.objects.all().filter(dog_id__in=owned_dog_ids).values('event_id')
+        attending_events = Event.objects.all().filter(id__in=attending_event_ids)
 
     return render(request, 'woofer/index.html', 
-        { 'some_words' : some_words }
-    )
+    { 
+        'owned_events' : owned_events,
+        'attending_events' : attending_events
+    })

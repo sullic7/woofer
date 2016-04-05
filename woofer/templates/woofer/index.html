@@ -2,18 +2,96 @@
 
 {% block page_title %}Woofer{% endblock %}
 
+{% block scripts %}
+<script>
+window.onload = function () {
+  var options = {
+    valueNames: [ 'name', 'start_day', 'start_time', 'city',
+                  'activity', 'location'  ],
+    page: 10,
+    plugins: [ ListPagination({}) ]
+  };
+  
+  var ownedEventsList = new List('owned_events', options);
+  var attendingEventsList = new List('attending_events', options);
+}
+</script>
+{% endblock %}
+
 {% block content %}
-<div class="container">
-    <div class="row">
-        <div class="col-md-12"> 
-            <p class="text-center">Welcome to woofer I'm the index!</p>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-mid-12">
-            <p class="text-center">{{ some_words }}</p>
-        </div>
-        
-    </div>
+{% if request.user.is_authenticated %}
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Event's you own</h3>
+  </div>
+  
+  <div class="panel-body">
+    <div id="owned_events">
+    <input class="search" placeholder="Search" />
+    <button class="sort" data-sort="name">Sort by name</button>
+    <button class="sort" data-sort="start_day">Sort by start day</button>
+    <button class="sort" data-sort="start_time">Sort by start time</button>
+  <table>
+    <thead>
+      <tr></tr>
+    </thead>
+    <tbody class="list">
+      {% for event in owned_events %}
+        <tr>
+          <td class="name">{{ event.name }}</td>
+          <td class="start_day">{{ event.start_day }}</td>
+          <td class="start_time">{{ event.start_time }}</td>
+          <td class="duration">{{ event.duration }}</td>
+          <td class="city">{{ event.city }}</td>
+          <td class="activity">{{ event.activity }}</td>
+          <td class="location">{{ event.location }}</td>
+          <!-- buttons -->
+          <td><a href="{% url 'edit-event' event.id %}" ><button class="">Edit<span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button></a></td>
+          <td><a href="{% url 'view-event' event.id %}" ><button class="">View<span class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span></button></a></td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <ul class="pagination"></ul>
 </div>
+  </div>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Event's you're attending</h3>
+  </div>
+  <div id="attending_events">
+    <input class="search" placeholder="Search" />
+    <button class="sort" data-sort="name">Sort by name</button>
+    <button class="sort" data-sort="start_day">Sort by start day</button>
+    <button class="sort" data-sort="start_time">Sort by start time</button>
+  <table>
+    <thead>
+      <tr></tr>
+    </thead>
+    <tbody class="list">
+      {% for event in attending_events %}
+        <tr>
+          <td class="name">{{ event.name }}</td>
+          <td class="start_day">{{ event.start_day }}</td>
+          <td class="start_time">{{ event.start_time }}</td>
+          <td class="duration">{{ event.duration }}</td>
+          <td class="city">{{ event.city }}</td>
+          <td class="activity">{{ event.activity }}</td>
+          <td class="location">{{ event.location }}</td>
+          <!-- buttons -->
+          <td><a href="{% url 'view-event' event.id %}" ><button class="">View<span class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span></button></a></td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <ul class="pagination"></ul>
+</div>
+  <div class="panel-body">
+    
+  </div>
+</div>
+{% endif %}
+
 {% endblock %}
