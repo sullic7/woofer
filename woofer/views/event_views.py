@@ -16,17 +16,23 @@ def view_event(request, eventid):
     event = Event.objects.get(id=eventid)
     dog_ids = EventAttendance.objects.all().filter(event_id = event.id).values('dog_id')
     dogs = Dog.objects.all().filter(id__in=dog_ids)
+    
+    attend_form = None
+    if request.user.is_authenticated():
+        attend_form = EventAttendanceForm()
+
     return render(request, 'woofer/events/event_details.html',
     { 
         'event' : event,
-        'dogs' : dogs
+        'dogs' : dogs,
+        'attend_form' : attend_form
     })
     
     
 def view_event_list(request):
     """ This view provides a list of events not in the past sorted by their date. """
     events = Event.objects.all()
-    return render(request, 'woofer/events/event_list.html', { 'events' : events })
+    return render(request, 'woofer/events/event_list.html',{ 'events' : events })
 
 @login_required
 def create_event(request):
