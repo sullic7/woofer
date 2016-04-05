@@ -9,7 +9,7 @@ def index(request):
     owned_events = None
     attending_events = None
     
-    if request.user.is_authenticated:
+    if request.user.is_authenticated():
         owned_events = Event.objects.all().filter(user = request.user)
         
         owned_dog_ids = Dog.objects.all().filter(owner = request.user)
