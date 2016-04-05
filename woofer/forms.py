@@ -35,6 +35,18 @@ class CreateEventForm(ModelForm):
         widgets = {
             'user' : forms.HiddenInput()
         }
+        
+class EventAttendanceForm(forms.Form):
+    """ Form for attending an event. """
+    dog_field = None
+  
+    def __init__(self, user):
+        dogs = Dog.objects.all().filter(owner = user)
+        DOGS = []
+        for dog in dogs:
+            DOGS.append((dog.id, dog.name))
+        DOGS = tuple(DOGS) 
+        self.dog_field = forms.ChoiceField(choices=DOGS, required=True, label='Dogs')
     
 class ProfileForm(ModelForm):
     """ Form for editing and creating user woofer profiles. """

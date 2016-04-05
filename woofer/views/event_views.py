@@ -6,7 +6,7 @@ from django.views.generic.edit import UpdateView
 from django.contrib.auth.decorators import login_required
 
 from django.http import HttpResponseRedirect
-from ..forms import EditEventForm, CreateEventForm
+from ..forms import EditEventForm, CreateEventForm, EventAttendanceForm
 from ..models import Event, EventAttendance, Dog
 from django.contrib.auth.models import User
 
@@ -70,8 +70,19 @@ def edit_event(request, eventid):
             'form_action' : reverse('edit-event', args=[eventid])
         } )
 
-def attend_event(request, eventid, dogid):
+def attend_event(request, eventid):
     """ Display form for attending an event """
-    # check that event still has spots open
-    # take dogs out of form and add to database
-    pass
+    if request.method == 'POST':
+        # check that event still has spots open
+        event = Event.objects.get(id = eventid)
+        form = EventAttendanceForm(request.POST)
+        if form.is_valid():
+            selected_dog_id = form.cleaned_data['dog_field']
+            # query to create new event attendance object, call .save()
+            return HttpResponseRedirect(reverse('view-event', args=[eventid]))
+    else:
+        form = EventAttendanceForm()
+    
+        return render(request, 'woofer/events/event_details.html', {
+                'form' : form
+            } )
