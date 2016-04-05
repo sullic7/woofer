@@ -60,6 +60,7 @@ class Event(models.Model):
     start_time = models.TimeField(auto_now=False, auto_now_add=False)
     duration = models.DurationField()
     description = models.TextField()
+    attendance_cap = models.IntegerField(default=0)
     INDOOR = 'I'
     OUTDOOR = 'O'
     LOCATION_CHOICES = (
