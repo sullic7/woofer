@@ -15,16 +15,19 @@ class DogForm(ModelForm):
     class Meta:
         model = Dog
         exclude = ('id','owner',)
-        # fields = '__all__'
+        widgets = {
+            'id' : forms.HiddenInput(),
+            'owner' : forms.HiddenInput()
+        }
 
 class EditEventForm(ModelForm):
-    """ Form for editing/creating and event. """
+    """ Form for editing an event. """
     class Meta:
         model = Event
         fields = '__all__'
 
 class CreateEventForm(ModelForm):
-    """ Form for editing/creating and event. """
+    """ Form for creating an event. """
     class Meta:
         model = Event
         exclude = ('user', )

@@ -32,7 +32,7 @@ urlpatterns = [
     
     # Dog URLs
     url(r'^dog_view/(?P<dogid>[0-9]+)/$', dog_views.dog_view, name='view-dog'),
-    # url(r'^add_dog/$', dog_views.edit_dog, name='add-dog'),
+    url(r'^add_dog/$', dog_views.add_dog, name='add-dog'),
     url(r'^edit_dog/(?P<dogid>[0-9]+)/$', dog_views.edit_dog, name='edit-dog'),
     
     # Event URLs

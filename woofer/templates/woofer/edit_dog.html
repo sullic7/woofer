@@ -8,14 +8,10 @@
 <h3>{{ message }}</h3> 
 {% endif %}
   
-<form action="/edit_dog" method="post">
+<form action="{{ form_action }}" method="post">
     {% csrf_token %}
     {{ form }}
     <input type="submit" value="Submit" />
 </form>
 
-<!--{% if True %}-->
-<a href="{% url 'edit-dog' dog.id %}"><button type="button" class="btn btn-default">Save</button></a>
-<!--{% endif %}-->
-    
 {% endblock %}
