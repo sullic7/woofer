@@ -3,6 +3,7 @@ from django.contrib.auth import authenticate, logout, login
 from django.contrib.auth.forms import UserCreationForm
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 
 from django.http import HttpResponseRedirect
 from ..forms import LoginForm, ProfileForm
@@ -34,7 +35,6 @@ def login_view(request):
                 message = "The password is valid, but the account has been disabled!"
         else:
             message = "Invalid username or password"
-
     else:
         form = LoginForm()
     
@@ -51,7 +51,12 @@ def create_user(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
         if form.is_valid():
-            form.save()
+            # This creates a new User in the database
+            new_user = form.save()
+            # now we create a new blank profile, link it to the new user and save it
+            new_profile = Profile()
+            new_profile.user = new_user
+            new_profile.save()
             return HttpResponseRedirect('/index')
     else:
         form = UserCreationForm()
@@ -63,6 +68,11 @@ def create_user(request):
         'form_action' : reverse('create-user')
     })
     
+@login_required
+def view_profile(request):
+    """ Redirect the user to the view user screen for their userid. """
+    profile = Profile.objects.get(user = request.user)
+    return HttpResponseRedirect(reverse('view-user', args=[profile.id]))
 
 def logout_view(request):
     """ This view handels loggign the user out. """
