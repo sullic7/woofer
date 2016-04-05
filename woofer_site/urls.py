@@ -40,6 +40,7 @@ urlpatterns = [
     url(r'^event_edit/(?P<eventid>[0-9]+)/$', event_views.edit_event, name='edit-event'),
     url(r'^event_view/(?P<eventid>[0-9]+)/$', event_views.view_event, name='view-event'),
     url(r'^event_list/$', event_views.view_event_list, name='event-list'),
-    url(r'^create_event/$', event_views.create_event, name='create-event')
+    url(r'^create_event/$', event_views.create_event, name='create-event'),
+    url(r'^attend_event/(?P<eventid>[0-9]+)/$', event_views.attend_event, name='attend-event')
     
 ]

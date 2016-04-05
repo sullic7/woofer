@@ -62,3 +62,9 @@ def edit_event(request, eventid):
             'message' : None,
             'form_action' : reverse('edit-event', args=[eventid])
         } )
+
+def attend_event(request, eventid, dogid):
+    """ Display form for attending an event """
+    # check that event still has spots open
+    # take dogs out of form and add to database
+    pass

@@ -35,12 +35,6 @@ class CreateEventForm(ModelForm):
         widgets = {
             'user' : forms.HiddenInput()
         }
-
-class AttendEventForm(ModelForm):
-    """ Form for attending an event with a dog. """
-    class Meta:
-        model = EventAttendance
-        fields = ['dog_id']
     
 class ProfileForm(ModelForm):
     """ Form for editing and creating user woofer profiles. """
