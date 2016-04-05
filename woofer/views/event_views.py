@@ -7,13 +7,20 @@ from django.contrib.auth.decorators import login_required
 
 from django.http import HttpResponseRedirect
 from ..forms import EditEventForm, CreateEventForm
-from ..models import Event
+from ..models import Event, EventAttendance, Dog
+from django.contrib.auth.models import User
 
 
 def view_event(request, eventid):
     """ This is the view for the event details. """
     event = Event.objects.get(id=eventid)
-    return render(request, 'woofer/events/event_details.html', { 'event' : event })
+    dog_ids = EventAttendance.objects.all().filter(event_id = event.id).values('dog_id')
+    dogs = Dog.objects.all().filter(id__in=dog_ids)
+    return render(request, 'woofer/events/event_details.html',
+    { 
+        'event' : event,
+        'dogs' : dogs
+    })
     
     
 def view_event_list(request):
