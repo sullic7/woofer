@@ -12,13 +12,13 @@ window.onload = function () {
     plugins: [ ListPagination({}) ]
   };
   
-  var userList = new List('events', options);
+  var eventList = new List('events', options);
 }
 </script>
 {% endblock %}
 
 {% block content %}
-  <div id="events">
+<div id="events">
     <input class="search" placeholder="Search" />
     <button class="sort" data-sort="name">Sort by name</button>
     <button class="sort" data-sort="start_day">Sort by start day</button>
