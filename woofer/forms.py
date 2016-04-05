@@ -4,7 +4,7 @@ from django.db import models
 from django import forms
 from django.contrib.auth.models import User
 from django.forms import ModelForm
-from models import Profile, Dog, Event
+from models import Profile, Dog, Event, EventAttendance
 
 class LoginForm(forms.Form):
     username = forms.CharField(label='Username1', max_length=100)
@@ -35,9 +35,15 @@ class CreateEventForm(ModelForm):
         widgets = {
             'user' : forms.HiddenInput()
         }
-        
+
+class AttendEventForm(ModelForm):
+    """ Form for attending an event with a dog. """
+    class Meta:
+        model = EventAttendance
+        fields = ['dog_id']
+    
 class ProfileForm(ModelForm):
-    """ Form for editing and creating user woofer profiles """
+    """ Form for editing and creating user woofer profiles. """
     class Meta:
         model = Profile
         fields = '__all__'
