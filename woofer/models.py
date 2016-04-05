@@ -15,6 +15,10 @@ class Profile(models.Model):
     
     def __str__(self):
         return self.user.username
+        
+    def get_formatted_birthday(self):
+        if self.birthday:
+            return self.birthday.strftime("%m/%d/%y")
     
 class Dog(models.Model):
     """ This is a model for dogs which are owned by one user. """
@@ -47,6 +51,10 @@ class Dog(models.Model):
     
     def __str__(self):
         return self.name
+        
+    def get_formatted_birthday(self):
+        if self.birthday:
+            return self.birthday.strftime("%m/%d/%y")
     
 class Event(models.Model):
     """ This is a model for events created by one user. """
@@ -80,6 +88,14 @@ class Event(models.Model):
     
     def __str__(self):
         return self.name
+        
+    def get_formatted_date(self):
+        if self.start_day:
+            return self.start_day.strftime("%m/%d/%y")
+            
+    def get_formatted_time(self):
+        if self.start_time:
+            return self.start_time.strftime("%H:%M")
     
 class EventAttendance(models.Model):
     """ This is a model for dogs attending events. """

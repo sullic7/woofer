@@ -39,15 +39,15 @@
             <p class="text-center"> City: {{ event.city }}</p>
         </div>
         <div class="col-md-3">
-            <p class="text-right">Zipcode: {{  event.zipcode }}</p>
+            <p class="text-right">Zipcode: {{ event.zipcode }}</p>
         </div>
     </div>
     <div class="row">
         <div class="col-md-4">
-            <p class="text-left">Start Day: {{ event.start_day }}</p>
+            <p class="text-left">Start Day: {{ event.get_formatted_date }}</p>
         </div>
         <div class="col-md-4">
-            <p class="text-center">Start Time: {{ event.start_time }}</p>
+            <p class="text-center">Start Time: {{ event.get_formatted_time }}</p>
         </div>
         <div class="col-md-4">
             <p class="text-right">Duration: {{ event.duration }}</p>
