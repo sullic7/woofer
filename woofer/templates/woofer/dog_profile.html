@@ -57,6 +57,9 @@
             <p class="text-right">Birthday: {{ dog.birthday }}</p>
         </div>
     </div>
+    <div>
+        <a href="{% url 'edit-dog' dog.id %}" ><button class="">Edit<span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button></a>
+    </div>
 </div>
     
 {% endblock %}
