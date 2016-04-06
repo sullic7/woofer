@@ -4,62 +4,54 @@
 
 {% block content %}
 
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-md-12">
-            <h1 class="text-center">View Event</h1>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <h2 class="text-center">Name: {{ event.name }}</h2>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-6">
-            <h4 class="text-left">Activity: {{ event.get_activity_display }}</h4>
-        </div>
-        <div class="col-md-6">
-            <h4 class="text-right">User: {{ event.user }}</h4>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <p class="text-center">Description: {{ event.description }}</p>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-3">
-            <p class="text-left">Location: {{ event.get_location_display }}</p>
-        </div>
-        <div class="col-md-3">
-            <p class="text-center">Address: {{ event.address }}</p>
-        </div>
-        <div class="col-md-3">
-            <p class="text-center"> City: {{ event.city }}</p>
-        </div>
-        <div class="col-md-3">
-            <p class="text-right">Zipcode: {{ event.zipcode }}</p>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-4">
-            <p class="text-left">Start Day: {{ event.get_formatted_date }}</p>
-        </div>
-        <div class="col-md-4">
-            <p class="text-center">Start Time: {{ event.get_formatted_time }}</p>
-        </div>
-        <div class="col-md-4">
-            <p class="text-right">Duration: {{ event.duration }}</p>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <p class="text-center">insert list of users attending event</p>
-        </div>
-    </div>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">{{ event.name }}</h3>
+  </div>
+    <div class="panel-body">
+      <p>Activity: {{ event.get_activity_display }}</p>
+      <p>User: {{ event.user }}</p>
+      <p>Description: {{ event.description }}</p>
+      <p>Location: {{ event.get_location_display }}</p>
+      <p>Address: {{ event.address }}</p>
+      <p> City: {{ event.city }}</p>
+      <p>Zipcode: {{  event.zipcode }}</p>
+      <p>Start Day: {{ event.get_formatted_date }}</p>
+      <p>Start Time: {{ event.get_formatted_time }}</p>
+      <p>Duration: {{ event.duration }}</p>
+  </div>
 </div>
 
-
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Dogs Attending</h3>
+  </div>
+  
+  <div class="panel-body">
+      <div id="dogs">
+        <input class="search" placeholder="Search" />
+        <button class="sort" data-sort="name">Sort by name</button>
+        <button class="sort" data-sort="birthday">Sort by birthday</button>
+        <button class="sort" data-sort="breed">Sort by breed</button>
+        <button class="sort" data-sort="owner">Sort by owner</button>
+      <table>
+        <thead>
+          <tr></tr>
+        </thead>
+        <tbody class="list">
+          {% for dog in dogs %}
+            <tr>
+              <td class="name">{{ dog.name }}</td>
+              <td class="birthday">{{ dog.birthday }}</td>
+              <td class="breed">{{ dog.breed }}</td>
+              <td class="breed">{{ dog.owner.get_full_name }}</td>
+              <!-- Edit buttons -->
+              <td><a href="{% url 'view-dog' dog.id %}" ><button class="">View<span class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span></button></a></td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+  </div>
+</div>
 
 {% endblock %}

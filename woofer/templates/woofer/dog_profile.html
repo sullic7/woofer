@@ -3,61 +3,22 @@
 {% block page_title %}Woofer{% endblock %}
 
 {% block content %}
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-md-12">
-            <h1 class="text-center">Dog Profile</h1>
-            </div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">{{ dog.name }}'s Profile</h3>
     </div>
-    <div class="row">
-        <div class="col-md-12">
-            <h4 class="text-center">Owner: {{ dog.owner }}</h4>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-3">
-            <p class="text-left">Name: {{ dog.name }}</p>
-        </div>
-        <div class="col-md-3">
-            <p class=text-center>Breed: {{ dog.breed }}</p>
-        </div>
-        <div class="col-md-3">
-            <p class="text-center">Activity: {{ dog.get_activity_display }}</p>
-        </div>
-        <div classs="col-md-3">
-            <p class="text-right">Weight: {{ dog.weight }}</p>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <p class="text-center">Picture of dog here</p>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <p class="text-center">Bio: {{ dog.bio}}</p>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-4">
-            <p class="text-left">Temperament Dogs: {{ dog.get_temperament_dogs_display }}</p>
-        </div>
-        <div class="col-md-4">
-            <p class="text-center">Temperament Kids: {{ dog.get_temperament_kids_display }}</p>
-        </div>
-        <div class="col-md-4">
-            <p class="text-right">Temperament Strangers: {{ dog.get_temperament_strangers_display }}</p>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-6">
-            <p class="text-left">Potty Trained: {{ dog.potty_trained }}</p>
-        </div>
-        <div class="col-md-6">
-            <p class="text-right">Birthday: {{ dog.get_formatted_birthday }}</p>
-        </div>
-    </div>
-    <div>
+    <div class="panel-body">
+        <p>Owner: {{ dog.owner }}</p>
+        <p>Breed: {{ dog.breed }}</p>
+        <p>Activity: {{ dog.get_activity_display }}</p>
+        <p>Weight: {{ dog.weight }}</p>
+        <p>Bio: {{ dog.bio }}</p>
+        <p>Temperament Dogs: {{ dog.get_temperament_dogs_display }}</p>
+        <p>Temperament Kids: {{ dog.get_treatment_kids_display }}</p>
+        <p>Temperament Stranger: {{ dog.get_temperament_strangers_display</p>
+        <p>Potty Trained: {{ dog.potty_trained }}</p>
+        <p>Birthday: {{ dog.get_formatted_birthday }}</p>
         <a href="{% url 'edit-dog' dog.id %}" ><button class="">Edit<span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button></a>
     </div>
 </div>
