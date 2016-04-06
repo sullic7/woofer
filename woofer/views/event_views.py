@@ -6,7 +6,8 @@ from django.views.generic.edit import UpdateView
 from django.contrib.auth.decorators import login_required
 
 from django.http import HttpResponseRedirect
-from ..forms import EditEventForm, CreateEventForm, EventAttendanceForm
+from ..forms import EditEventForm, CreateEventForm, EventAttendanceForm, \
+RemoveAttendanceForm
 from ..models import Event, EventAttendance, Dog
 from django.contrib.auth.models import User
 
@@ -14,18 +15,20 @@ from django.contrib.auth.models import User
 def view_event(request, eventid):
     """ This is the view for the event details. """
     event = Event.objects.get(id=eventid)
-    dog_ids = EventAttendance.objects.all().filter(event_id = event.id).values('dog_id')
+    dog_ids = EventAttendance.objects.all().filter(event_id = event.id).values('dog')
     dogs = Dog.objects.all().filter(id__in=dog_ids)
     
     attend_form = None
     if request.user.is_authenticated():
-        attend_form = EventAttendanceForm(request.user)
+        attend_form = EventAttendanceForm(request.user, event)
+        remove_form = RemoveAttendanceForm(request.user, event)
 
     return render(request, 'woofer/events/event_details.html',
     { 
         'event' : event,
         'dogs' : dogs,
-        'attend_form' : attend_form
+        'attend_form' : attend_form,
+        'remove_form' : remove_form
     })
     
     
@@ -81,20 +84,36 @@ def attend_event(request, eventid):
     if request.method == 'POST':
         # check that event still has spots open
         selected_event = Event.objects.get(id = eventid)
-        form = EventAttendanceForm(request.user, request.POST)
-        if form.is_valid():
-            print(form.cleaned_data)    
+        form = EventAttendanceForm(request.user, selected_event, request.POST)
+        if form.is_valid():   
             selected_dog = form.cleaned_data['dog_field']
             # Make a new event attendence and save it
             event_attendance = EventAttendance()
-            print(selected_event)
-            print(selected_dog.name)
-            print(selected_dog.id)
-            print(selected_dog.__dict__)
             event_attendance.event = selected_event
             event_attendance.dog = selected_dog
-            print(event_attendance)
             event_attendance.save()
+            return HttpResponseRedirect(reverse('view-event', args=[eventid]))
+        else:
+            return HttpResponseRedirect(reverse('view-event', args=[eventid]))
+    else:
+        # This should never happen
+        return HttpResponseRedirect(reverse('view-event', args=[eventid]))
+
+
+def unattend_event(request, eventid):
+    """ Display form for attending an event """
+    if request.method == 'POST':
+        # check that event still has spots open
+        selected_event = Event.objects.get(id = eventid)
+        form = RemoveAttendanceForm(request.user, selected_event, request.POST)
+        if form.is_valid():   
+            selected_dog = form.cleaned_data['dog_field']
+            # Get the event attendance in question and delete it
+            event_attendance = EventAttendance.objects \
+                        .get(event=selected_event, dog=selected_dog)
+            event_attendance.delete()
+            return HttpResponseRedirect(reverse('view-event', args=[eventid]))
+        else:
             return HttpResponseRedirect(reverse('view-event', args=[eventid]))
     else:
         # This should never happen

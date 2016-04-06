@@ -102,3 +102,7 @@ class EventAttendance(models.Model):
     id = models.AutoField(primary_key=True)
     event = models.ForeignKey('Event', on_delete=models.CASCADE)
     dog = models.ForeignKey('Dog', on_delete=models.CASCADE)
+    
+    def __str__(self):
+        return ("%s's Dog %s is attending %s" %
+            (self.dog.owner.username, self.dog.name, self.event.name))

@@ -41,21 +41,41 @@ class EventAttendanceForm(forms.Form):
     """ Form for attending an event. """
     # dog_field = None
   
-    def __init__(self, user, *args, **kwargs):
+    def __init__(self, user, current_event, *args, **kwargs):
         super(EventAttendanceForm, self).__init__(*args, **kwargs)
+        # Get all the dogs attending this event so we don't add them to the
+        # list of dogs that can be added
+        dogs_ids_attending_event = EventAttendance.objects.all() \
+                .filter(event = current_event) \
+                .values('dog')
+        
         self.fields['dog_field'] = forms.ModelChoiceField(
-                queryset=Dog.objects.filter(owner=user),
+                queryset=Dog.objects.filter(owner=user) \
+                            .exclude(id__in=dogs_ids_attending_event),
                 required=True,
-                label='Dog')
+                label='Dog',
+                empty_label=None)
+                
+                
+class RemoveAttendanceForm(forms.Form):
+    """ Form for attending an event. """
+    # dog_field = None
+  
+    def __init__(self, user, current_event, *args, **kwargs):
+        super(RemoveAttendanceForm, self).__init__(*args, **kwargs)
+        # Get all the dogs attending this event so we don't add them to the
+        # list of dogs that can be added
+        dogs_ids_attending_event = EventAttendance.objects.all() \
+                .filter(event = current_event) \
+                .values('dog')
         
-        # dogs = Dog.objects.all().filter(owner = user)
-        # DOGS = []
-        # for dog in dogs:
-        #     DOGS.append((dog.id, dog.name))
-        # DOGS = tuple(DOGS) 
-        # self.dog_field = forms.ChoiceField(choices=DOGS, required=True, label='Dogs')
-        
-    
+        self.fields['dog_field'] = forms.ModelChoiceField(
+                queryset=Dog.objects.filter(owner=user) \
+                            .filter(id__in=dogs_ids_attending_event),
+                required=True,
+                label='Dog',
+                empty_label=None)
+
 class ProfileForm(ModelForm):
     """ Form for editing and creating user woofer profiles. """
     class Meta:

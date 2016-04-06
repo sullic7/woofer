@@ -73,4 +73,20 @@
 </div>
 {% endif %}
 
+{% if remove_form %}
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Unattend Event</h3>
+  </div>
+  <div class="panel-body">
+    
+    <form action="{% url 'unattend-event' event.id %}" method="post">
+        {% csrf_token %}
+        {{ remove_form }}
+        <input type="submit" value="Submit" />
+    </form>
+  </div>
+</div>
+{% endif %}
+
 {% endblock %}
