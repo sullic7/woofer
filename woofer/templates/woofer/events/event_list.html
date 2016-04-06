@@ -25,18 +25,26 @@ window.onload = function () {
     <button class="sort" data-sort="start_time">Sort by start time</button>
   <table>
     <thead>
-      <tr></tr>
+      <tr>
+        <th>Name</th>
+        <th>Date</th>
+        <th>Time</th>
+        <th>Duration</th>
+        <th>City</th>
+        <th>Activity</th>
+        <th>Location</th>
+      </tr>
     </thead>
     <tbody class="list">
       {% for event in events %}
         <tr>
           <td class="name">{{ event.name }}</td>
-          <td class="start_day">{{ event.start_day }}</td>
-          <td class="start_time">{{ event.start_time }}</td>
+          <td class="start_day">{{ event.get_formatted_date }}</td>
+          <td class="start_time">{{ event.get_formatted_time }}</td>
           <td class="duration">{{ event.duration }}</td>
           <td class="city">{{ event.city }}</td>
-          <td class="activity">{{ event.activity }}</td>
-          <td class="location">{{ event.location }}</td>
+          <td class="activity">{{ event.get_activity_display }}</td>
+          <td class="location">{{ event.get_location_display }}</td>
           <!-- Edit buttons -->
           <td><a href="{% url 'edit-event' event.id %}" ><button class="">Edit<span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button></a></td>
           <td><a href="{% url 'view-event' event.id %}" ><button class="">View<span class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span></button></a></td>

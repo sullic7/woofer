@@ -29,7 +29,7 @@ window.onload = function () {
     <p>Email: {{ profile.user.email }}</p>
     <p>Phone Number: {{ profile.phone_number }}</p>
     <p>Zipcode: {{ profile.zipcode }}</p>
-    <p>Birthday: {{ profile.birthday }}</p>
+    <p>Birthday: {{ profile.get_formatted_birthday }}</p>
   </div>
 </div>
 
@@ -52,7 +52,7 @@ window.onload = function () {
           {% for dog in dogs %}
             <tr>
               <td class="name">{{ dog.name }}</td>
-              <td class="birthday">{{ dog.birthday }}</td>
+              <td class="birthday">{{ dog.get_formatted_birthday }}</td>
               <td class="breed">{{ dog.breed }}</td>
               <!-- Edit buttons -->
               <td><a href="{% url 'view-dog' dog.id %}" ><button class="">View<span class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span></button></a></td>

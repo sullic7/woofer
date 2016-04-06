@@ -3,6 +3,7 @@
 {% block page_title %}Woofer{% endblock %}
 
 {% block content %}
+
 <div class="panel panel-default">
     <div class="panel-heading">
         <h3 class="panel-title">{{ dog.name }}'s Profile</h3>
@@ -17,7 +18,7 @@
         <p>Temperament Kids: {{ dog.get_treatment_kids_display }}</p>
         <p>Temperament Stranger: {{ dog.get_temperament_strangers_display</p>
         <p>Potty Trained: {{ dog.potty_trained }}</p>
-        <p>Birthday: {{ dog.birthday }}</p>
+        <p>Birthday: {{ dog.get_formatted_birthday }}</p>
         <a href="{% url 'edit-dog' dog.id %}" ><button class="">Edit<span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button></a>
     </div>
 </div>
