@@ -38,6 +38,7 @@ urlpatterns = [
     url(r'^add_dog/$', dog_views.add_dog, name='add-dog'),
     url(r'^dog_view/(?P<dogid>[0-9]+)/$', dog_views.dog_view, name='view-dog'),
     url(r'^edit_dog/(?P<dogid>[0-9]+)/$', dog_views.edit_dog, name='edit-dog'),
+    url(r'^delete_dog/(?P<dogid>[0-9]+)/$', dog_views.delete_dog, name='delete-dog'),
     
     # Event URLs
     url(r'^event_edit/(?P<eventid>[0-9]+)/$', event_views.edit_event, name='edit-event'),

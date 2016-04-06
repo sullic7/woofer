@@ -9,7 +9,7 @@ from django.http import HttpResponseRedirect, HttpResponseForbidden
 from django.template import RequestContext
 from django.utils.translation import ugettext as _
 from ..forms import DogForm
-from ..models import Dog
+from ..models import Dog, Profile
 
 def dog_view(request, dogid):
     """ This is the view for the dog details. """
@@ -58,3 +58,9 @@ def edit_dog(request, dogid):
             'message' : None,
             'form_action' : reverse('edit-dog', args=[dogid])
         } )
+        
+def delete_dog(request, dogid):
+    """ Delete dog from database """
+    Dog.objects.get(id = dogid).delete()
+        
+    return HttpResponseRedirect(reverse('view-profile'))
