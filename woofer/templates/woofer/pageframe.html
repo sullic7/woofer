@@ -53,6 +53,7 @@
         {% if request.user.is_authenticated %}
           <li><p>Welcome {{ user.username }} your userid is {{ user.id }}</p></li>
           <li><a href="{% url 'view-profile' %}">View Profile</a></li>
+          <li><a href="{% url 'add-dog' %}">Add Dog</a></li>
           <li><a href="{% url 'logout' %}">Logout</a></li>
         {% else %}
           <li><a href="{% url 'login' %}">Login</a></li>
