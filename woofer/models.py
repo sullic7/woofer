@@ -47,7 +47,7 @@ class Dog(models.Model):
     
     def __str__(self):
         return self.name
-    
+
 class Event(models.Model):
     """ This is a model for events created by one user. """
     id = models.AutoField(primary_key=True)
@@ -84,5 +84,5 @@ class Event(models.Model):
 class EventAttendance(models.Model):
     """ This is a model for dogs attending events. """
     id = models.AutoField(primary_key=True)
-    event_id = models.ForeignKey('Event', on_delete=models.CASCADE)
-    dog_id = models.ForeignKey('Dog', on_delete=models.CASCADE)
+    event = models.ForeignKey('Event', on_delete=models.CASCADE)
+    dog = models.ForeignKey('Dog', on_delete=models.CASCADE)

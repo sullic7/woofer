@@ -19,7 +19,7 @@ def view_event(request, eventid):
     
     attend_form = None
     if request.user.is_authenticated():
-        attend_form = EventAttendanceForm()
+        attend_form = EventAttendanceForm(request.user)
 
     return render(request, 'woofer/events/event_details.html',
     { 
@@ -80,15 +80,22 @@ def attend_event(request, eventid):
     """ Display form for attending an event """
     if request.method == 'POST':
         # check that event still has spots open
-        event = Event.objects.get(id = eventid)
-        form = EventAttendanceForm(request.POST)
+        selected_event = Event.objects.get(id = eventid)
+        form = EventAttendanceForm(request.user, request.POST)
         if form.is_valid():
-            selected_dog_id = form.cleaned_data['dog_field']
-            # query to create new event attendance object, call .save()
+            print(form.cleaned_data)    
+            selected_dog = form.cleaned_data['dog_field']
+            # Make a new event attendence and save it
+            event_attendance = EventAttendance()
+            print(selected_event)
+            print(selected_dog.name)
+            print(selected_dog.id)
+            print(selected_dog.__dict__)
+            event_attendance.event = selected_event
+            event_attendance.dog = selected_dog
+            print(event_attendance)
+            event_attendance.save()
             return HttpResponseRedirect(reverse('view-event', args=[eventid]))
     else:
-        form = EventAttendanceForm()
-    
-        return render(request, 'woofer/events/event_details.html', {
-                'form' : form
-            } )
+        # This should never happen
+        return HttpResponseRedirect(reverse('view-event', args=[eventid]))

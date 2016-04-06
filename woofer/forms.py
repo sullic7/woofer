@@ -39,15 +39,22 @@ class CreateEventForm(ModelForm):
         
 class EventAttendanceForm(forms.Form):
     """ Form for attending an event. """
-    dog_field = None
+    # dog_field = None
   
-    def __init__(self, user):
-        dogs = Dog.objects.all().filter(owner = user)
-        DOGS = []
-        for dog in dogs:
-            DOGS.append((dog.id, dog.name))
-        DOGS = tuple(DOGS) 
-        self.dog_field = forms.ChoiceField(choices=DOGS, required=True, label='Dogs')
+    def __init__(self, user, *args, **kwargs):
+        super(EventAttendanceForm, self).__init__(*args, **kwargs)
+        self.fields['dog_field'] = forms.ModelChoiceField(
+                queryset=Dog.objects.filter(owner=user),
+                required=True,
+                label='Dog')
+        
+        # dogs = Dog.objects.all().filter(owner = user)
+        # DOGS = []
+        # for dog in dogs:
+        #     DOGS.append((dog.id, dog.name))
+        # DOGS = tuple(DOGS) 
+        # self.dog_field = forms.ChoiceField(choices=DOGS, required=True, label='Dogs')
+        
     
 class ProfileForm(ModelForm):
     """ Form for editing and creating user woofer profiles. """
