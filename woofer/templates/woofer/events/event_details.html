@@ -51,7 +51,26 @@
           {% endfor %}
         </tbody>
       </table>
+    </div>
   </div>
 </div>
+
+
+<!-- If event.start_day is still valid and event.attendance is not 0 -->
+{% if attend_form %}
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Attend Event</h3>
+  </div>
+  <div class="panel-body">
+    
+    <form action="{% url 'attend-event' event.id %}" method="post">
+        {% csrf_token %}
+        {{ attend_form }}
+        <input type="submit" value="Submit" />
+    </form>
+  </div>
+</div>
+{% endif %}
 
 {% endblock %}

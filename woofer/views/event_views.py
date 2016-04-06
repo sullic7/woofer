@@ -6,7 +6,7 @@ from django.views.generic.edit import UpdateView
 from django.contrib.auth.decorators import login_required
 
 from django.http import HttpResponseRedirect
-from ..forms import EditEventForm, CreateEventForm
+from ..forms import EditEventForm, CreateEventForm, EventAttendanceForm
 from ..models import Event, EventAttendance, Dog
 from django.contrib.auth.models import User
 
@@ -16,17 +16,23 @@ def view_event(request, eventid):
     event = Event.objects.get(id=eventid)
     dog_ids = EventAttendance.objects.all().filter(event_id = event.id).values('dog_id')
     dogs = Dog.objects.all().filter(id__in=dog_ids)
+    
+    attend_form = None
+    if request.user.is_authenticated():
+        attend_form = EventAttendanceForm(request.user)
+
     return render(request, 'woofer/events/event_details.html',
     { 
         'event' : event,
-        'dogs' : dogs
+        'dogs' : dogs,
+        'attend_form' : attend_form
     })
     
     
 def view_event_list(request):
     """ This view provides a list of events not in the past sorted by their date. """
     events = Event.objects.all()
-    return render(request, 'woofer/events/event_list.html', { 'events' : events })
+    return render(request, 'woofer/events/event_list.html',{ 'events' : events })
 
 @login_required
 def create_event(request):
@@ -69,3 +75,27 @@ def edit_event(request, eventid):
             'message' : None,
             'form_action' : reverse('edit-event', args=[eventid])
         } )
+
+def attend_event(request, eventid):
+    """ Display form for attending an event """
+    if request.method == 'POST':
+        # check that event still has spots open
+        selected_event = Event.objects.get(id = eventid)
+        form = EventAttendanceForm(request.user, request.POST)
+        if form.is_valid():
+            print(form.cleaned_data)    
+            selected_dog = form.cleaned_data['dog_field']
+            # Make a new event attendence and save it
+            event_attendance = EventAttendance()
+            print(selected_event)
+            print(selected_dog.name)
+            print(selected_dog.id)
+            print(selected_dog.__dict__)
+            event_attendance.event = selected_event
+            event_attendance.dog = selected_dog
+            print(event_attendance)
+            event_attendance.save()
+            return HttpResponseRedirect(reverse('view-event', args=[eventid]))
+    else:
+        # This should never happen
+        return HttpResponseRedirect(reverse('view-event', args=[eventid]))
