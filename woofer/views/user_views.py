@@ -118,11 +118,11 @@ def edit_user(request, userid):
     else:
         form = UserDetailsForm(instance = request.user)
         
-        return render(request, 'woofer/show_form.html', { 
-            'form' : form,
-            'message' : None,
-            'form_action' : reverse('edit-user', args=[userid])
-        } )
+    return render(request, 'woofer/show_form.html', { 
+        'form' : form,
+        'message' : None,
+        'form_action' : reverse('edit-user', args=[userid])
+    } )
     
 
 def edit_profile(request, userid):
