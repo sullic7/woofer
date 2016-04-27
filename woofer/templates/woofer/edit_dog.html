@@ -7,11 +7,7 @@
 {% if message %}
 <h3>{{ message }}</h3> 
 {% endif %}
-  
-<form action="{{ form_action }}" method="post">
-    {% csrf_token %}
-    {{ form }}
-    <input type="submit" value="Submit" />
-</form>
+
+{% include 'woofer/render_bootstrap_form.html' %}
 
 {% endblock %}
