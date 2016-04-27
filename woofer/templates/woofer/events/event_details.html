@@ -89,4 +89,8 @@
 </div>
 {% endif %}
 
+{% if event.user.id == request.user.id %}
+
+{% endif %}
+<a href="{% url 'edit-event' event.id %}" ><button class="">Edit<span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button></a>
 {% endblock %}

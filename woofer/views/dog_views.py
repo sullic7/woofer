@@ -38,6 +38,11 @@ def add_dog(request):
 
 def edit_dog(request, dogid):
     """ Display and handel a form for editing dogs """
+    dog = Dog.objects.get(id = dogid)
+    # Check that the user can edit this dog
+    if dog.owner.id != request.user.id:
+        return HttpResponseRedirect(reverse('view-dog', args=[dogid]))
+    
     if request.method == 'POST':
         form = DogForm(request.POST)
         if form.is_valid():
@@ -50,14 +55,13 @@ def edit_dog(request, dogid):
             
             return HttpResponseRedirect(reverse('view-dog', args=[dogid]))
     else:
-        dog = Dog.objects.get(id = dogid)
         form = DogForm(instance = dog)
         
-        return render(request, 'woofer/edit_dog.html', {
-            'form' : form,
-            'message' : None,
-            'form_action' : reverse('edit-dog', args=[dogid])
-        } )
+    return render(request, 'woofer/edit_dog.html', {
+        'form' : form,
+        'message' : None,
+        'form_action' : reverse('edit-dog', args=[dogid])
+    } )
         
 def delete_dog(request, dogid):
     """ Delete dog from database """

@@ -45,8 +45,7 @@ window.onload = function () {
           <td class="city">{{ event.city }}</td>
           <td class="activity">{{ event.get_activity_display }}</td>
           <td class="location">{{ event.get_location_display }}</td>
-          <!-- Edit buttons -->
-          <td><a href="{% url 'edit-event' event.id %}" ><button class="">Edit<span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button></a></td>
+          <!-- View button -->
           <td><a href="{% url 'view-event' event.id %}" ><button class="">View<span class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span></button></a></td>
         </tr>
       {% endfor %}

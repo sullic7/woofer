@@ -130,6 +130,9 @@ def edit_profile(request, userid):
     woofer_user = User.objects.get(id = userid)
     current_profile = Profile.objects.get(user = woofer_user)
     
+    if woofer_user.id != request.user.id:
+        return HttpResponseRedirect(reverse('view-profile', args=[userid]))
+    
     if request.method == 'POST':
         form = ProfileForm(request.POST)
         if form.is_valid():
