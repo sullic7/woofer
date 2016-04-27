@@ -2,7 +2,7 @@ from __future__ import unicode_literals
 
 from django.db import models
 from django.contrib.auth.models import User
-from validators import validate_date
+from validators import validate_date, validate_greater_than_or_equal_zero
 
 class Profile(models.Model):
     """ This is a profile model of the django user model. More info here 
@@ -71,7 +71,8 @@ class Event(models.Model):
     start_time = models.TimeField(auto_now=False, auto_now_add=False)
     duration = models.DurationField()
     description = models.TextField()
-    attendance_cap = models.IntegerField(default=0)
+    attendance_cap = models.IntegerField(default=0,
+        validators=[validate_greater_than_or_equal_zero])
     INDOOR = 'I'
     OUTDOOR = 'O'
     LOCATION_CHOICES = (
