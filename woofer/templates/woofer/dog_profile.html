@@ -16,7 +16,7 @@
         <p>Bio: {{ dog.bio }}</p>
         <p>Temperament Dogs: {{ dog.get_temperament_dogs_display }}</p>
         <p>Temperament Kids: {{ dog.get_treatment_kids_display }}</p>
-        <p>Temperament Stranger: {{ dog.get_temperament_strangers_display</p>
+        <p>Temperament Stranger: {{ dog.get_temperament_strangers_display }}</p>
         <p>Potty Trained: {{ dog.potty_trained }}</p>
         <p>Birthday: {{ dog.get_formatted_birthday }}</p>
         <a href="{% url 'edit-dog' dog.id %}" ><button class="">Edit<span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button></a>

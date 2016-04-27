@@ -2,6 +2,7 @@ from __future__ import unicode_literals
 
 from django.db import models
 from django.contrib.auth.models import User
+from validators import validate_date
 
 class Profile(models.Model):
     """ This is a profile model of the django user model. More info here 
@@ -10,7 +11,8 @@ class Profile(models.Model):
     user = models.OneToOneField(User)
     phone_number = models.IntegerField(blank=True, null=True)
     zipcode = models.IntegerField(blank=True, null=True)
-    birthday = models.DateField(auto_now=False, auto_now_add=False, blank=True, null=True)
+    birthday = models.DateField(auto_now=False, auto_now_add=False, blank=True,
+        null=True, validators=[validate_date])
     # add photo
     
     def __str__(self):
@@ -25,7 +27,8 @@ class Dog(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=100)
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
-    birthday = models.DateField(auto_now=False, auto_now_add=False, blank=True, null=True)
+    birthday = models.DateField(auto_now=False, auto_now_add=False, blank=True,
+        null=True, validators=[validate_date])
     weight = models.IntegerField(blank=True, null=True)
     breed = models.CharField(max_length=100, blank=True, null=True)
     potty_trained = models.BooleanField()
