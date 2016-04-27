@@ -19,6 +19,7 @@ def view_event(request, eventid):
     dogs = Dog.objects.all().filter(id__in=dog_ids)
     
     attend_form = None
+    remove_form = None
     if request.user.is_authenticated():
         attend_form = EventAttendanceForm(request.user, event)
         remove_form = RemoveAttendanceForm(request.user, event)
