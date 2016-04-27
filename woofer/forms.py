@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 from django.forms import ModelForm
 from models import Profile, Dog, Event, EventAttendance
 from django.contrib.auth.forms import UserChangeForm
+from django.utils.translation import ugettext_lazy as _
 
 class LoginForm(forms.Form):
     username = forms.CharField(label='Username', max_length=100)
@@ -20,12 +21,21 @@ class DogForm(ModelForm):
             'id' : forms.HiddenInput(),
             'owner' : forms.HiddenInput()
         }
+        help_texts = {
+            'birthday': _('Format YYYY-MM-DD')
+        }
+
 
 class EditEventForm(ModelForm):
     """ Form for editing an event. """
     class Meta:
         model = Event
         fields = '__all__'
+        help_texts = {
+            'start_day': _('Format YYYY-MM-DD'),
+            'start_time': _('Format HH:MM:SS.'),
+            'duration': _('Format HH:MM:SS.'),
+        }
 
 class CreateEventForm(ModelForm):
     """ Form for creating an event. """
@@ -36,7 +46,13 @@ class CreateEventForm(ModelForm):
         widgets = {
             'user' : forms.HiddenInput()
         }
+        help_texts = {
+            'start_day': _('Format YYYY-MM-DD'),
+            'start_time': _('Format HH:MM:SS.'),
+            'duration': _('Format HH:MM:SS.'),
+        }
         
+
 class EventAttendanceForm(forms.Form):
     """ Form for attending an event. """
     # dog_field = None
@@ -81,6 +97,9 @@ class ProfileForm(ModelForm):
     class Meta:
         model = Profile
         exclude = ('user', )
+        help_texts = {
+            'birthday': _('Format YYYY-MM-DD')
+        }
         
 class UserDetailsForm(ModelForm):
     class Meta:

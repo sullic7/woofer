@@ -18,40 +18,48 @@ window.onload = function () {
 {% endblock %}
 
 {% block content %}
-<div id="events">
-    <input class="search" placeholder="Search" />
-    <button class="sort" data-sort="name">Sort by name</button>
-    <button class="sort" data-sort="start_day">Sort by start day</button>
-    <button class="sort" data-sort="start_time">Sort by start time</button>
-  <table>
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Date</th>
-        <th>Time</th>
-        <th>Duration</th>
-        <th>City</th>
-        <th>Activity</th>
-        <th>Location</th>
-      </tr>
-    </thead>
-    <tbody class="list">
-      {% for event in events %}
-        <tr>
-          <td class="name">{{ event.name }}</td>
-          <td class="start_day">{{ event.get_formatted_date }}</td>
-          <td class="start_time">{{ event.get_formatted_time }}</td>
-          <td class="duration">{{ event.duration }}</td>
-          <td class="city">{{ event.city }}</td>
-          <td class="activity">{{ event.get_activity_display }}</td>
-          <td class="location">{{ event.get_location_display }}</td>
-          <!-- View button -->
-          <td><a href="{% url 'view-event' event.id %}" ><button class="">View<span class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span></button></a></td>
-        </tr>
-      {% endfor %}
-    </tbody>
-  </table>
-  <ul class="pagination"></ul>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Events</h3>
+  </div>
+  
+  <div class="panel-body">
+    <div id="events">
+        <input class="search" placeholder="Search" />
+        <button class="sort" data-sort="name">Sort by name</button>
+        <button class="sort" data-sort="start_day">Sort by start day</button>
+        <button class="sort" data-sort="start_time">Sort by start time</button>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Duration</th>
+            <th>City</th>
+            <th>Activity</th>
+            <th>Location</th>
+          </tr>
+        </thead>
+        <tbody class="list">
+          {% for event in events %}
+            <tr>
+              <td class="name">{{ event.name }}</td>
+              <td class="start_day">{{ event.get_formatted_date }}</td>
+              <td class="start_time">{{ event.get_formatted_time }}</td>
+              <td class="duration">{{ event.duration }}</td>
+              <td class="city">{{ event.city }}</td>
+              <td class="activity">{{ event.get_activity_display }}</td>
+              <td class="location">{{ event.get_location_display }}</td>
+              <!-- View button -->
+              <td><a href="{% url 'view-event' event.id %}" ><button class="">View<span class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span></button></a></td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      <ul class="pagination"></ul>
+    </div>
+  </div>
 </div>
 
 {% endblock %}

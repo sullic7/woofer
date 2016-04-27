@@ -54,7 +54,8 @@ def create_event(request):
         
     return render(request, 'woofer/show_form.html', {
         'form' : form,
-        'form_action' : reverse('create-event')
+        'form_action' : reverse('create-event'),
+        'title' : "Create Event"
     } )
 
     
@@ -81,7 +82,8 @@ def edit_event(request, eventid):
         return render(request, 'woofer/show_form.html', {
             'form' : form,
             'message' : None,
-            'form_action' : reverse('edit-event', args=[eventid])
+            'form_action' : reverse('edit-event', args=[eventid]),
+            'title' : "Edit Event"
         } )
 
 def attend_event(request, eventid):

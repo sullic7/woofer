@@ -64,7 +64,8 @@ def create_user(request):
     return render(request, 'woofer/show_form.html', {
         'form' : form,
         'message' : message,
-        'form_action' : reverse('create-user')
+        'form_action' : reverse('create-user'),
+        'title' : "Create Account"
     })
     
 @login_required
@@ -121,7 +122,8 @@ def edit_user(request, userid):
     return render(request, 'woofer/show_form.html', { 
         'form' : form,
         'message' : None,
-        'form_action' : reverse('edit-user', args=[userid])
+        'form_action' : reverse('edit-user', args=[userid]),
+        'title' : "Edit Account"
     } )
     
 
@@ -149,7 +151,8 @@ def edit_profile(request, userid):
     return render(request, 'woofer/show_form.html', { 
         'form' : form,
         'message' : None,
-        'form_action' : reverse('edit-profile', args=[userid])
+        'form_action' : reverse('edit-profile', args=[userid]),
+        'title' : "Edit Profile"
     } )
 
 def change_password(request):
@@ -168,5 +171,6 @@ def change_password(request):
     return render(request, 'woofer/show_form.html', { 
         'form' : form,
         'message' : None,
-        'form_action' : reverse('change-password')
+        'form_action' : reverse('change-password'),
+        'title' : "Change Password"
     } )

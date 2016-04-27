@@ -30,9 +30,10 @@ def add_dog(request):
     else:
         form = DogForm()
         
-    return render(request, 'woofer/edit_dog.html', {
+    return render(request, 'woofer/show_form.html', {
         'form' : form,
-        'form_action' : reverse('add-dog')
+        'form_action' : reverse('add-dog'),
+        'title' : "Add Dog"
     } )
 
 
@@ -57,10 +58,11 @@ def edit_dog(request, dogid):
     else:
         form = DogForm(instance = dog)
         
-    return render(request, 'woofer/edit_dog.html', {
+    return render(request, 'woofer/show_form.html', {
         'form' : form,
         'message' : None,
-        'form_action' : reverse('edit-dog', args=[dogid])
+        'form_action' : reverse('edit-dog', args=[dogid]),
+        'title' : "Edit Dog"
     } )
         
 def delete_dog(request, dogid):
