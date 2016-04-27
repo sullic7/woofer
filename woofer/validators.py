@@ -7,6 +7,6 @@ def validate_date(date):
         result = date.strftime("%d/%m/%y")
     except ValueError:
         raise ValidationError(
-            _('%(date)s is not a valid date.'),
+            _('%(date)s is not a valid date of the form YYYY-MM-DD.'),
             params={'date': date.isoformat()},
         )

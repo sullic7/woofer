@@ -143,11 +143,11 @@ def edit_profile(request, userid):
     else:
         form = ProfileForm(instance = current_profile)
         
-        return render(request, 'woofer/show_form.html', { 
-            'form' : form,
-            'message' : None,
-            'form_action' : reverse('edit-profile', args=[userid])
-        } )
+    return render(request, 'woofer/show_form.html', { 
+        'form' : form,
+        'message' : None,
+        'form_action' : reverse('edit-profile', args=[userid])
+    } )
 
 def change_password(request):
     """ This view displays and handels an edit password form. """
