@@ -22,7 +22,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', home_views.index, name='home'),
     url(r'^index/$', home_views.index, name='index'),
-    
+
     # User URLs
     url(r'^login/$', user_views.login_view, name='login'),
     url(r'^logout/$', user_views.logout_view, name='logout'),
@@ -30,16 +30,16 @@ urlpatterns = [
     url(r'^view_user/(?P<userid>[0-9]+)/$', user_views.view_user, name='view-user'),
     url(r'^edit_user/(?P<userid>[0-9]+)/$', user_views.edit_user, name='edit-user'),
     url(r'^edit_profile/(?P<userid>[0-9]+)/$', user_views.edit_profile, name='edit-profile'),
-    url(r'^view_profile/$', user_views.view_profile, name='view-profile'),  
+    url(r'^view_profile/$', user_views.view_profile, name='view-profile'),
     url(r'^view_profile/(?P<userid>[0-9]+)/$', user_views.view_profile, name='view-profile'),
     url(r'^change_password/$', user_views.change_password, name='change-password'),
-    
+
     # Dog URLs
     url(r'^add_dog/$', dog_views.add_dog, name='add-dog'),
     url(r'^dog_view/(?P<dogid>[0-9]+)/$', dog_views.dog_view, name='view-dog'),
     url(r'^edit_dog/(?P<dogid>[0-9]+)/$', dog_views.edit_dog, name='edit-dog'),
     url(r'^delete_dog/(?P<dogid>[0-9]+)/$', dog_views.delete_dog, name='delete-dog'),
-    
+
     # Event URLs
     url(r'^event_edit/(?P<eventid>[0-9]+)/$', event_views.edit_event, name='edit-event'),
     url(r'^event_view/(?P<eventid>[0-9]+)/$', event_views.view_event, name='view-event'),
@@ -47,5 +47,5 @@ urlpatterns = [
     url(r'^create_event/$', event_views.create_event, name='create-event'),
     url(r'^attend_event/(?P<eventid>[0-9]+)/$', event_views.attend_event, name='attend-event'),
     url(r'^unattend_event/(?P<eventid>[0-9]+)/$', event_views.unattend_event, name='unattend-event')
-    
+
 ]
