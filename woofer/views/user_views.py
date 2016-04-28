@@ -33,9 +33,16 @@ def login_view(request):
             message = "Invalid username or password"
     else:
         form = LoginForm()
+<<<<<<< HEAD
     return render(request, 'woofer/login.html', {
+=======
+    
+    return render(request, 'woofer/show_form.html', {
+>>>>>>> master
         'form' : form,
-        'message': message
+        'message' : message,
+        'form_action' : reverse('login'),
+        'title' : "Login"
     })
 def create_user(request):
     """ This view handels displaying and processing a user creation form """

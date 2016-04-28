@@ -74,7 +74,13 @@ window.onload = function () {
     <button class="sort" data-sort="start_time">Sort by start time</button>
   <table>
     <thead>
-      <tr></tr>
+      <th>Name</th>
+      <th>Start Day</th>
+      <th>Start Time</th>
+      <th>Duration</th>
+      <th>City</th>
+      <th>Activity</th>
+      <th>Locatoin</th>
     </thead>
     <tbody class="list">
       {% for event in attending_events %}
