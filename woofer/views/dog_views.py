@@ -36,7 +36,7 @@ def edit_dog(request, dogid):
     """ Display and handel a form for editing dogs """
     dog = Dog.objects.get(id=dogid)
     # Check that the user can edit this dog
-    if dog.owner.id != request.user.id:
+    if request.user.is_authenticated() or dog.owner.id != request.user.id:
         return HttpResponseRedirect(reverse('view-dog', args=[dogid]))
 
     if request.method == 'POST':
@@ -61,5 +61,8 @@ def edit_dog(request, dogid):
 
 def delete_dog(request, dogid):
     """ Delete dog from database """
+    if request.user.is_authenticated() or dog.owner.id != request.user.id:
+        return HttpResponseRedirect(reverse('view-dog', args=[dogid]))
+
     Dog.objects.get(id=dogid).delete()
     return HttpResponseRedirect(reverse('view-profile'))

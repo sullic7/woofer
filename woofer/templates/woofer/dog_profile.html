@@ -19,8 +19,10 @@
         <p>Temperament Stranger: {{ dog.get_temperament_strangers_display }}</p>
         <p>Potty Trained: {{ dog.potty_trained }}</p>
         <p>Birthday: {{ dog.get_formatted_birthday }}</p>
-        <a href="{% url 'edit-dog' dog.id %}" ><button class="">Edit<span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button></a>
-        <a href="{% url 'delete-dog' dog.id %}" ><button class="">Delete<span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button></a>
+        {% if request.user.is_authenticated and dog.owner.id == request.user.id%}
+            <a href="{% url 'edit-dog' dog.id %}" ><button class="">Edit<span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button></a>
+            <a href="{% url 'delete-dog' dog.id %}" ><button class="">Delete<span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button></a>
+        {% endif %}
     </div>
 </div>
     
