@@ -1,3 +1,4 @@
+""" This module contains the forms used in the Woofer app. """
 from __future__ import unicode_literals
 from django import forms
 from django.contrib.auth.models import User
@@ -6,12 +7,14 @@ from woofer.models import Profile, Dog, Event, EventAttendance
 from django.utils.translation import ugettext_lazy as _
 
 class LoginForm(forms.Form):
+    """ This form is used to collect the user's login information. """
     username = forms.CharField(label='Username', max_length=100)
     password = forms.CharField(label='Password', widget=forms.PasswordInput, max_length=100)
 
 class DogForm(ModelForm):
     """ Form for adding/editing a dog profile. """
     class Meta:
+        # pylint: disable=missing-docstring
         model = Dog
         exclude = ('id', 'owner',)
         widgets = {
@@ -22,10 +25,10 @@ class DogForm(ModelForm):
             'birthday': _('Format YYYY-MM-DD')
         }
 
-
 class EditEventForm(ModelForm):
     """ Form for editing an event. """
     class Meta:
+        # pylint: disable=missing-docstring
         model = Event
         fields = '__all__'
         help_texts = {
@@ -37,6 +40,7 @@ class EditEventForm(ModelForm):
 class CreateEventForm(ModelForm):
     """ Form for creating an event. """
     class Meta:
+        # pylint: disable=missing-docstring
         model = Event
         exclude = ('user', )
         # We don't want these to be changed so hide them from the user
@@ -48,6 +52,7 @@ class CreateEventForm(ModelForm):
             'start_time': _('Format HH:MM:SS.'),
             'duration': _('Format HH:MM:SS.'),
         }
+
 class EventAttendanceForm(forms.Form):
     """ Form for attending an event. """
     # dog_field = None
@@ -64,6 +69,7 @@ class EventAttendanceForm(forms.Form):
             required=True,
             label='Dog',
             empty_label=None)
+
 class RemoveAttendanceForm(forms.Form):
     """ Form for attending an event. """
     # dog_field = None
@@ -80,15 +86,20 @@ class RemoveAttendanceForm(forms.Form):
             required=True,
             label='Dog',
             empty_label=None)
+
 class ProfileForm(ModelForm):
     """ Form for editing and creating user woofer profiles. """
     class Meta:
+        # pylint: disable=missing-docstring
         model = Profile
         exclude = ('user', )
         help_texts = {
             'birthday': _('Format YYYY-MM-DD')
         }
+
 class UserDetailsForm(ModelForm):
+    """ This form is used to create and edit user account details."""
     class Meta:
+        # pylint: disable=missing-docstring
         model = User
         fields = ['first_name', 'last_name', 'email']

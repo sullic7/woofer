@@ -1,3 +1,4 @@
+""" This module holds the views pertaining to Events."""
 from django.shortcuts import render
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
@@ -13,8 +14,8 @@ from ..models import Event, EventAttendance, Dog
 def view_event(request, eventid):
     """ This is the view for the event details. """
     event = Event.objects.annotate(Count('eventattendance')).get(id=eventid)
-    
-    dog_ids = EventAttendance.objects.all().filter(event_id = event.id).values('dog')
+
+    dog_ids = EventAttendance.objects.all().filter(event_id=event.id).values('dog')
     dogs = Dog.objects.all().filter(id__in=dog_ids)
 
     attend_form = None
@@ -81,10 +82,9 @@ def attend_event(request, eventid):
     """ Display form for attending an event """
     if request.method == 'POST':
         # check that event still has spots open
-        selected_event = Event.objects.annotate(Count('eventattendance')).get(id = eventid)
+        selected_event = Event.objects.annotate(Count('eventattendance')).get(id=eventid)
 
         if selected_event.eventattendance__count >= selected_event.attendance_cap:
-            print("should print a message")
             messages.warning(request, "This event is at capacity so you can not attend it.")
             return HttpResponseRedirect(reverse('view-event', args=[eventid]))
 

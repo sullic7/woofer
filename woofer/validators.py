@@ -1,3 +1,4 @@
+"""This file contins validators for the Woofer forms and models"""
 from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext_lazy as _
 

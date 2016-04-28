@@ -1,3 +1,4 @@
+""" This module holds the views pertaining to the index page."""
 from django.shortcuts import render
 
 from ..models import Event, EventAttendance, Dog

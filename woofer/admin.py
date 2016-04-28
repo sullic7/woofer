@@ -1,5 +1,5 @@
+""" This file registers the Woofer classes with the Django admin interface."""
 from django.contrib import admin
-from django import forms
 from .models import Profile, Dog, Event, EventAttendance
 # Register your models here.
 admin.site.register(Profile)

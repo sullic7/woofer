@@ -1,3 +1,4 @@
+""" This module holds the views pertaining to Users."""
 from django.shortcuts import render
 from django.contrib.auth import authenticate, logout, login
 from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm
@@ -33,7 +34,7 @@ def login_view(request):
             message = "Invalid username or password"
     else:
         form = LoginForm()
-    
+
     return render(request, 'woofer/show_form.html', {
         'form' : form,
         'message' : message,

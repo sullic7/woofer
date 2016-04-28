@@ -1,3 +1,4 @@
+""" This module holds the models for the Woofer app."""
 from __future__ import unicode_literals
 
 from django.db import models
@@ -13,12 +14,18 @@ class Profile(models.Model):
     zipcode = models.IntegerField(blank=True, null=True)
     birthday = models.DateField(auto_now=False, auto_now_add=False, blank=True,\
         null=True, validators=[validate_date])
-    # add photo
+
     def __str__(self):
+        """ This method is used to provide a string represenation for the
+        Django admin interface.
+        """
         return self.user.username
+
     def get_formatted_birthday(self):
+        """ Return a formated string holding the users birthday. """
         if self.birthday:
             return self.birthday.strftime("%m/%d/%y")
+
 class Dog(models.Model):
     """ This is a model for dogs which are owned by one user. """
     id = models.AutoField(primary_key=True)
@@ -49,14 +56,18 @@ class Dog(models.Model):
     temperament_strangers = models.CharField(max_length=2, choices=TEMPERAMENT_CHOICES)
     # add photo
     def __str__(self):
+        """ This method is used to provide a string represenation for the
+        Django admin interface.
+        """
         return self.name
 
     def get_formatted_birthday(self):
+        """ Return a formated string holding the dog's birthday."""
         if self.birthday:
             return self.birthday.strftime("%m/%d/%y")
 
 class Event(models.Model):
-    """ This is a model for events created by one user. """
+    """ This is a model for events created by one user."""
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=50)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -85,19 +96,32 @@ class Event(models.Model):
         (HIGH, 'Very active')
         )
     activity = models.CharField(max_length=2, choices=ACTIVITY_CHOICES)
+
     def __str__(self):
+        """ This method is used to provide a string represenation for the
+        Django admin interface.
+        """
         return self.name
+
     def get_formatted_date(self):
+        """ Return a formated string holding the event's date."""
         if self.start_day:
             return self.start_day.strftime("%m/%d/%y")
+
     def get_formatted_time(self):
+        """ Return a formated string holding the event's time."""
         if self.start_time:
             return self.start_time.strftime("%H:%M")
+
 class EventAttendance(models.Model):
     """ This is a model for dogs attending events. """
     id = models.AutoField(primary_key=True)
     event = models.ForeignKey('Event', on_delete=models.CASCADE)
     dog = models.ForeignKey('Dog', on_delete=models.CASCADE)
+
     def __str__(self):
+        """ This method is used to provide a string represenation for the
+        Django admin interface.
+        """
         return ("%s's Dog %s is attending %s" %
                 (self.dog.owner.username, self.dog.name, self.event.name))
