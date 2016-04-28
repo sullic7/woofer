@@ -19,6 +19,10 @@ body {
     padding: 5px;
 }
 
+.navbar-brand {
+    color: #555454 !important;
+}
+
 th {
     padding: 1px 5px 1px 5px;
 }
