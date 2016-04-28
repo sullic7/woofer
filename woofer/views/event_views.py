@@ -32,7 +32,7 @@ def view_event(request, eventid):
                   })
 def view_event_list(request):
     """ This view provides a list of events not in the past sorted by their date. """
-    events = Event.objects.all()
+    events = Event.objects.annotate(Count('eventattendance')).all()
     return render(request, 'woofer/events/event_list.html', {'events' : events})
 
 @login_required
