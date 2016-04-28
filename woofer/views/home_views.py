@@ -14,7 +14,7 @@ def index(request):
         owned_dog_ids = Dog.objects.all().filter(owner=request.user)
 
         attending_event_ids = EventAttendance.\
-            objectsannotate(Count('eventattendance')).all().\
+            objects.annotate(Count('eventattendance')).all().\
             filter(dog_id__in=owned_dog_ids).values('event_id')
 
         attending_events = Event.objects.annotate(Count('eventattendance'))\
