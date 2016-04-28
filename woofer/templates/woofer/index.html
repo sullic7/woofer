@@ -69,43 +69,42 @@ window.onload = function () {
   <div class="panel-heading">
     <h3 class="panel-title">Events you're attending</h3>
   </div>
-  <div id="attending_events">
-    <input class="search" placeholder="Search" />
-    <button class="sort" data-sort="name">Sort by name</button>
-    <button class="sort" data-sort="start_day">Sort by start day</button>
-    <button class="sort" data-sort="start_time">Sort by start time</button>
-  <table>
-    <thead>
-      <th>Name</th>
-      <th>Start Day</th>
-      <th>Start Time</th>
-      <th>Duration</th>
-      <th>City</th>
-      <th>Attendance</th>
-      <th>Activity</th>
-      <th>Location</th>
-    </thead>
-    <tbody class="list">
-      {% for event in attending_events %}
-        <tr>
-          <td class="name">{{ event.name }}</td>
-          <td class="start_day">{{ event.get_formatted_date }}</td>
-          <td class="start_time">{{ event.get_formatted_time }}</td>
-          <td class="duration">{{ event.duration }}</td>
-          <td class="city">{{ event.city }}</td>
-          <td class="attendance">{{ event.eventattendance__count }} / {{ event.attendance_cap }}</td>
-          <td class="activity">{{ event.get_activity_display }}</td>
-          <td class="location">{{ event.get_location_display }}</td>
-          <!-- buttons -->
-          <td><a href="{% url 'view-event' event.id %}" ><button class="">View<span class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span></button></a></td>
-        </tr>
-      {% endfor %}
-    </tbody>
-  </table>
-  <ul class="pagination"></ul>
-</div>
   <div class="panel-body">
-    
+    <div id="attending_events">
+      <input class="search" placeholder="Search" />
+      <button class="sort" data-sort="name">Sort by name</button>
+      <button class="sort" data-sort="start_day">Sort by start day</button>
+      <button class="sort" data-sort="start_time">Sort by start time</button>
+    <table>
+      <thead>
+        <th>Name</th>
+        <th>Start Day</th>
+        <th>Start Time</th>
+        <th>Duration</th>
+        <th>City</th>
+        <th>Attendance</th>
+        <th>Activity</th>
+        <th>Location</th>
+      </thead>
+      <tbody class="list">
+        {% for event in attending_events %}
+          <tr>
+            <td class="name">{{ event.name }}</td>
+            <td class="start_day">{{ event.get_formatted_date }}</td>
+            <td class="start_time">{{ event.get_formatted_time }}</td>
+            <td class="duration">{{ event.duration }}</td>
+            <td class="city">{{ event.city }}</td>
+            <td class="attendance">{{ event.eventattendance__count }} / {{ event.attendance_cap }}</td>
+            <td class="activity">{{ event.get_activity_display }}</td>
+            <td class="location">{{ event.get_location_display }}</td>
+            <!-- buttons -->
+            <td><a href="{% url 'view-event' event.id %}" ><button class="">View<span class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span></button></a></td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <ul class="pagination"></ul>
+  </div>
   </div>
 </div>
 {% else %}
