@@ -1,20 +1,15 @@
-from django.shortcuts import render, render_to_response, get_object_or_404
+from django.shortcuts import render
 from django.core.urlresolvers import reverse
-from django.contrib.auth import authenticate, logout
-from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
-from django.contrib import messages
 
-from django.http import HttpResponseRedirect, HttpResponseForbidden
-from django.template import RequestContext
-from django.utils.translation import ugettext as _
+from django.http import HttpResponseRedirect
 from ..forms import DogForm
-from ..models import Dog, Profile
+from ..models import Dog
 
 def dog_view(request, dogid):
     """ This is the view for the dog details. """
-    dog = Dog.objects.get(id = dogid)
-    return render(request, 'woofer/dog_profile.html', { 'dog' : dog })
+    dog = Dog.objects.get(id=dogid)
+    return render(request, 'woofer/dog_profile.html', {'dog' : dog})
 
 @login_required
 def add_dog(request):
@@ -29,21 +24,17 @@ def add_dog(request):
             return HttpResponseRedirect(reverse('view-dog', args=[new_dog.id]))
     else:
         form = DogForm()
-        
     return render(request, 'woofer/show_form.html', {
         'form' : form,
         'form_action' : reverse('add-dog'),
         'title' : "Add Dog"
-    } )
-
-
+    })
 def edit_dog(request, dogid):
     """ Display and handel a form for editing dogs """
-    dog = Dog.objects.get(id = dogid)
+    dog = Dog.objects.get(id=dogid)
     # Check that the user can edit this dog
     if dog.owner.id != request.user.id:
         return HttpResponseRedirect(reverse('view-dog', args=[dogid]))
-    
     if request.method == 'POST':
         form = DogForm(request.POST)
         if form.is_valid():
@@ -53,20 +44,16 @@ def edit_dog(request, dogid):
             new_dog.id = dogid
             new_dog.owner = request.user
             new_dog.save()
-            
             return HttpResponseRedirect(reverse('view-dog', args=[dogid]))
     else:
-        form = DogForm(instance = dog)
-        
+        form = DogForm(instance=dog)
     return render(request, 'woofer/show_form.html', {
         'form' : form,
         'message' : None,
         'form_action' : reverse('edit-dog', args=[dogid]),
         'title' : "Edit Dog"
-    } )
-        
+    })
 def delete_dog(request, dogid):
     """ Delete dog from database """
-    Dog.objects.get(id = dogid).delete()
-        
+    Dog.objects.get(id=dogid).delete()
     return HttpResponseRedirect(reverse('view-profile'))
