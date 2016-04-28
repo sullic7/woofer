@@ -37,10 +37,11 @@ def login_view(request):
     else:
         form = LoginForm()
     
-    
-    return render(request, 'woofer/login.html', {
+    return render(request, 'woofer/show_form.html', {
         'form' : form,
-        'message': message
+        'message' : message,
+        'form_action' : reverse('login'),
+        'title' : "Login"
     })
     
 def create_user(request):
