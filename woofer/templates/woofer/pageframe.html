@@ -49,10 +49,10 @@
       <ul class="nav navbar-nav">
         <li><a href="{% url 'index' %}">Home</a></li>
         <li><a href="{% url 'event-list' %}">Search Events</a></li>
-        <li><a href="{% url 'create-event' %}">Create Event</a></li>
         
         {% if request.user.is_authenticated %}
-          <li><p>Welcome {{ user.username }} your userid is {{ user.id }}</p></li>
+          <li><h4 class="nav-welcome">Welcome {{ user.username }}!</h4></li>
+          <li><a href="{% url 'create-event' %}">Create Event</a></li>
           <li><a href="{% url 'view-profile' %}">View Profile</a></li>
           <li><a href="{% url 'add-dog' %}">Add Dog</a></li>
           <li><a href="{% url 'logout' %}">Logout</a></li>
