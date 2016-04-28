@@ -46,13 +46,13 @@ window.onload = function () {
       {% for event in owned_events %}
         <tr>
           <td class="name">{{ event.name }}</td>
-          <td class="start_day">{{ event.start_day }}</td>
-          <td class="start_time">{{ event.start_time }}</td>
+          <td class="start_day">{{ event.get_formatted_date }}</td>
+          <td class="start_time">{{ event.get_formatted_time }}</td>
           <td class="duration">{{ event.duration }}</td>
           <td class="city">{{ event.city }}</td>
           <td class="attendance">{{ event.eventattendance__count }} / {{ event.attendance_cap }}</td>
-          <td class="activity">{{ event.activity }}</td>
-          <td class="location">{{ event.location }}</td>
+          <td class="activity">{{ event.get_activity_display }}</td>
+          <td class="location">{{ event.get_location_display }}</td>
           <!-- buttons -->
           <td><a href="{% url 'edit-event' event.id %}" ><button class="">Edit<span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button></a></td>
           <td><a href="{% url 'view-event' event.id %}" ><button class="">View<span class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span></button></a></td>
@@ -89,13 +89,13 @@ window.onload = function () {
       {% for event in attending_events %}
         <tr>
           <td class="name">{{ event.name }}</td>
-          <td class="start_day">{{ event.start_day }}</td>
-          <td class="start_time">{{ event.start_time }}</td>
+          <td class="start_day">{{ event.get_formatted_date }}</td>
+          <td class="start_time">{{ event.get_formatted_time }}</td>
           <td class="duration">{{ event.duration }}</td>
           <td class="city">{{ event.city }}</td>
           <td class="attendance">{{ event.eventattendance__count }} / {{ event.attendance_cap }}</td>
-          <td class="activity">{{ event.activity }}</td>
-          <td class="location">{{ event.location }}</td>
+          <td class="activity">{{ event.get_activity_display }}</td>
+          <td class="location">{{ event.get_location_display }}</td>
           <!-- buttons -->
           <td><a href="{% url 'view-event' event.id %}" ><button class="">View<span class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span></button></a></td>
         </tr>
