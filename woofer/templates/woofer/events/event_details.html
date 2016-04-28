@@ -2,6 +2,20 @@
 
 {% block page_title %}Woofer{% endblock %}
 
+{% block scripts %}
+<script>
+window.onload = function () {
+  var options = {
+    valueNames: [ 'name', 'birthday', 'breed' ],
+    page: 8,
+    plugins: [ ListPagination({}) ]
+  };
+  
+  var dogList = new List('dogs', options);
+}
+</script>
+{% endblock %}
+
 {% block content %}
 
 <div class="panel panel-default">
