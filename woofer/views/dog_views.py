@@ -2,8 +2,8 @@
 from django.shortcuts import render
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
-
 from django.http import HttpResponseRedirect
+
 from ..forms import DogForm
 from ..models import Dog
 
@@ -61,8 +61,9 @@ def edit_dog(request, dogid):
 
 def delete_dog(request, dogid):
     """ Delete dog from database """
+    dog = Dog.objects.get(id=dogid)
     if not request.user.is_authenticated() or dog.owner.id != request.user.id:
         return HttpResponseRedirect(reverse('view-dog', args=[dogid]))
 
-    Dog.objects.get(id=dogid).delete()
+    dog.delete()
     return HttpResponseRedirect(reverse('view-profile'))

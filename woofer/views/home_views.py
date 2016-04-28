@@ -1,8 +1,8 @@
 """ This module holds the views pertaining to the index page."""
 from django.shortcuts import render
+from django.db.models import Count
 
 from ..models import Event, EventAttendance, Dog
-from django.db.models import Count
 
 def index(request):
     """ Display the home page. If the user is logged in display a list of

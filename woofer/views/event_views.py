@@ -4,8 +4,8 @@ from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.db.models import Count
-
 from django.http import HttpResponseRedirect
+
 from ..forms import EditEventForm, CreateEventForm, EventAttendanceForm, \
 RemoveAttendanceForm
 from ..models import Event, EventAttendance, Dog

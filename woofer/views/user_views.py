@@ -31,7 +31,7 @@ def login_view(request):
                 return HttpResponseRedirect(reverse('index'))
             else:
                 messages.warning(request,
-                    "The password is valid, but the account has been disabled!")
+                                 "The password is valid, but the account has been disabled!")
         else:
             messages.warning(request, "Invalid username or password")
     else:
