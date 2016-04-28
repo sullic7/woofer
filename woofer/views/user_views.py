@@ -5,6 +5,7 @@ from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
 from django.http import HttpResponseRedirect
 from ..forms import LoginForm, ProfileForm, UserDetailsForm
@@ -29,9 +30,10 @@ def login_view(request):
                 login(request, user)
                 return HttpResponseRedirect(reverse('index'))
             else:
-                message = "The password is valid, but the account has been disabled!"
+                messages.warning(request,
+                    "The password is valid, but the account has been disabled!")
         else:
-            message = "Invalid username or password"
+            messages.warning(request, "Invalid username or password")
     else:
         form = LoginForm()
 
