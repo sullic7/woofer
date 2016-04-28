@@ -31,6 +31,7 @@ def view_event(request, eventid):
                       'attend_form' : attend_form,
                       'remove_form' : remove_form
                   })
+
 def view_event_list(request):
     """ This view provides a list of events not in the past sorted by their date. """
     events = Event.objects.annotate(Count('eventattendance')).all()
@@ -49,6 +50,7 @@ def create_event(request):
             return HttpResponseRedirect(reverse('view-event', args=[new_event.id]))
     else:
         form = CreateEventForm()
+
     return render(request, 'woofer/show_form.html', {
         'form' : form,
         'form_action' : reverse('create-event'),
@@ -61,6 +63,7 @@ def edit_event(request, eventid):
     # Check that the user can edit this event
     if not request.user.is_authenticated() or event.user.id != request.user.id:
         return HttpResponseRedirect(reverse('view-event', args=[eventid]))
+
     if request.method == 'POST':
         form = EditEventForm(request.POST)
         if form.is_valid():
