@@ -24,7 +24,7 @@ window.onload = function () {
   <div class="panel-heading">
     <h3 class="panel-title">Events you own</h3>
   </div>
-  
+
   <div class="panel-body">
     <div id="owned_events">
     <input class="search" placeholder="Search" />
@@ -33,7 +33,13 @@ window.onload = function () {
     <button class="sort" data-sort="start_time">Sort by start time</button>
   <table>
     <thead>
-      <tr></tr>
+      <th>Name</th>
+      <th>Start Day</th>
+      <th>Start Time</th>
+      <th>Duration</th>
+      <th>City</th>
+      <th>Activity</th>
+      <th>Locatoin</th>
     </thead>
     <tbody class="list">
       {% for event in owned_events %}
