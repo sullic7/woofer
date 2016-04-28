@@ -54,11 +54,12 @@ def create_event(request):
         'form_action' : reverse('create-event'),
         'title' : "Create Event"
     })
+
 def edit_event(request, eventid):
     """ Display and handel a form for editing events """
     event = Event.objects.get(id=eventid)
     # Check that the user can edit this event
-    if request.user.is_authenticated() or event.user.id != request.user.id:
+    if not request.user.is_authenticated() or event.user.id != request.user.id:
         return HttpResponseRedirect(reverse('view-event', args=[eventid]))
     if request.method == 'POST':
         form = EditEventForm(request.POST)
@@ -103,7 +104,6 @@ def attend_event(request, eventid):
     else:
         # This should never happen
         return HttpResponseRedirect(reverse('view-event', args=[eventid]))
-
 
 def unattend_event(request, eventid):
     """ Display form for attending an event """
