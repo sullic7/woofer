@@ -71,12 +71,13 @@ def edit_event(request, eventid):
             return HttpResponseRedirect(reverse('view-event', args=[eventid]))
     else:
         form = EditEventForm(instance=event)
-        return render(request, 'woofer/show_form.html', {
-            'form' : form,
-            'message' : None,
-            'form_action' : reverse('edit-event', args=[eventid]),
-            'title' : "Edit Event"
-        })
+
+    return render(request, 'woofer/show_form.html', {
+        'form' : form,
+        'message' : None,
+        'form_action' : reverse('edit-event', args=[eventid]),
+        'title' : "Edit Event"
+    })
 
 def attend_event(request, eventid):
     """ Display form for attending an event """
