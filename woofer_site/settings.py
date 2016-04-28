@@ -127,3 +127,5 @@ STATICFILES_DIRS = [
 ]
 
 LOGIN_URL = '/login/'
+
+MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'

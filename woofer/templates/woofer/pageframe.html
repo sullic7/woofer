@@ -68,7 +68,17 @@
   </div><!-- /.container-fluid -->
 </nav>
     <div id="content_wrap">
-     {% block content %}Yo boi I'm the pageframe you should put some content in me.{% endblock %}
+
+      {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-warning alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        {{ message }}
+      </div>
+      {% endfor %}
+      {% endif %}
+      
+     {% block content %}If you are seeing this please contact a site administrator.{% endblock %}
      </div>
   </div>
   </body>

@@ -11,10 +11,11 @@
     <div class="panel-body">
       <p>Activity: {{ event.get_activity_display }}</p>
       <p>User: {{ event.user }}</p>
+      <p>Capacity: {{ event.eventattendance__count }} / {{ event.attendance_cap }}</p>
       <p>Description: {{ event.description }}</p>
       <p>Location: {{ event.get_location_display }}</p>
       <p>Address: {{ event.address }}</p>
-      <p> City: {{ event.city }}</p>
+      <p>City: {{ event.city }}</p>
       <p>Zipcode: {{  event.zipcode }}</p>
       <p>Start Day: {{ event.get_formatted_date }}</p>
       <p>Start Time: {{ event.get_formatted_time }}</p>

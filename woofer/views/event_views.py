@@ -4,6 +4,8 @@ from django.contrib.auth.forms import UserCreationForm
 from django.core.urlresolvers import reverse
 from django.views.generic.edit import UpdateView
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+from django.db.models import Count
 
 from django.http import HttpResponseRedirect
 from ..forms import EditEventForm, CreateEventForm, EventAttendanceForm, \
@@ -14,10 +16,11 @@ from django.contrib.auth.models import User
 
 def view_event(request, eventid):
     """ This is the view for the event details. """
-    event = Event.objects.get(id=eventid)
+    event = Event.objects.annotate(Count('eventattendance')).get(id=eventid)
+    
     dog_ids = EventAttendance.objects.all().filter(event_id = event.id).values('dog')
     dogs = Dog.objects.all().filter(id__in=dog_ids)
-    
+
     attend_form = None
     remove_form = None
     if request.user.is_authenticated():
@@ -90,9 +93,15 @@ def attend_event(request, eventid):
     """ Display form for attending an event """
     if request.method == 'POST':
         # check that event still has spots open
-        selected_event = Event.objects.get(id = eventid)
+        selected_event = Event.objects.annotate(Count('eventattendance')).get(id = eventid)
+
+        if selected_event.eventattendance__count >= selected_event.attendance_cap:
+            print("should print a message")
+            messages.warning(request, "This event is at capacity so you can not attend it.")
+            return HttpResponseRedirect(reverse('view-event', args=[eventid]))
+        
         form = EventAttendanceForm(request.user, selected_event, request.POST)
-        if form.is_valid():   
+        if form.is_valid():
             selected_dog = form.cleaned_data['dog_field']
             # Make a new event attendence and save it
             event_attendance = EventAttendance()

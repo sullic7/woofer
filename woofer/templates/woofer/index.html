@@ -38,8 +38,9 @@ window.onload = function () {
       <th>Start Time</th>
       <th>Duration</th>
       <th>City</th>
+      <th>Attendance</th>
       <th>Activity</th>
-      <th>Locatoin</th>
+      <th>Location</th>
     </thead>
     <tbody class="list">
       {% for event in owned_events %}
@@ -49,6 +50,7 @@ window.onload = function () {
           <td class="start_time">{{ event.start_time }}</td>
           <td class="duration">{{ event.duration }}</td>
           <td class="city">{{ event.city }}</td>
+          <td class="attendance">{{ event.eventattendance__count }} / {{ event.attendance_cap }}</td>
           <td class="activity">{{ event.activity }}</td>
           <td class="location">{{ event.location }}</td>
           <!-- buttons -->
@@ -79,8 +81,9 @@ window.onload = function () {
       <th>Start Time</th>
       <th>Duration</th>
       <th>City</th>
+      <th>Attendance</th>
       <th>Activity</th>
-      <th>Locatoin</th>
+      <th>Location</th>
     </thead>
     <tbody class="list">
       {% for event in attending_events %}
@@ -90,6 +93,7 @@ window.onload = function () {
           <td class="start_time">{{ event.start_time }}</td>
           <td class="duration">{{ event.duration }}</td>
           <td class="city">{{ event.city }}</td>
+          <td class="attendance">{{ event.eventattendance__count }} / {{ event.attendance_cap }}</td>
           <td class="activity">{{ event.activity }}</td>
           <td class="location">{{ event.location }}</td>
           <!-- buttons -->
