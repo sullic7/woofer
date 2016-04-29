@@ -1,6 +1,0 @@
-Here's some info for some test users
-
-test_user_1, cdqBq298HjJa, uAZbM8Kz79nx (forgot which pass is in use)
-test_user_2, dP5Ghe5eWAzk
-hats_for_the_test_user, SRPJpGZU5j2t
-admin, KN8uNrwKFQGk

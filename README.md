@@ -1,18 +1,7 @@
+## Woofer
 
-     ,-----.,--.                  ,--. ,---.   ,--.,------.  ,------.
-    '  .--./|  | ,---. ,--.,--. ,-|  || o   \  |  ||  .-.  \ |  .---'
-    |  |    |  || .-. ||  ||  |' .-. |`..'  |  |  ||  |  \  :|  `--, 
-    '  '--'\|  |' '-' ''  ''  '\ `-' | .'  /   |  ||  '--'  /|  `---.
-     `-----'`--' `---'  `----'  `---'  `--'    `--'`-------' `------'
-    ----------------------------------------------------------------- 
-
-
-Welcome to your Django project on Cloud9 IDE!
-
-Your Django project is already fully setup. Just click the "Run" button to start
-the application. On first run you will be asked to create an admin user. You can
-access your application from 'https://woofer-site-feman.c9users.io/' and the admin page from 
-'https://woofer-site-feman.c9users.io/admin'.
+A sample database is provided. If you want to start with a blank one simply
+delete the db.sqlite3 file.
 
 ## Starting from the Terminal
 
@@ -25,32 +14,28 @@ In case you want to run your Django application from the terminal just run:
 2) Run Django
 
     $ python manage.py runserver $IP:$PORT
-    
-## Configuration
 
-You can configure your Python version and `PYTHONPATH` used in
-Cloud9 > Preferences > Project Settings > Language Support.
+## Depedencies
+
+SQLlite 3
+Django 1.9
+Python 2.7
 
 ## Support & Documentation
 
 Django docs can be found at https://www.djangoproject.com/
 
-You may also want to follow the Django tutorial to create your first application:
-https://docs.djangoproject.com/en/1.9/intro/tutorial01/
+The rest of this project docmentation can be found on google docs.
 
-Visit http://docs.c9.io for support, or to learn more about using Cloud9 IDE.
-To watch some training videos, visit http://www.youtube.com/user/c9ide
+## Contributors
 
-## Max's notes
-PHPmyadmin lives at https://woofer-feman.c9users.io/phpmyadmin/
-hit me up for a login
+Max Llewellyn
+Alex Arsenault
+Cole Sullivan
+Nick Richards
 
-## Cole's notes
-When pushing to github from the Cloud9 terminal,
-switch to your own github username with the command:
-    
-git config user.name "putYourUserNameHere"
+## Coding Standard
 
-Otherwise commits will not be under your name.
-
-To access the admin site use  username admin and password KN8uNrwKFQGk.     
+Our project conforms to the PEP8 coding standard with some exceptions.
+To check the status of the code run the lint.sh script in the same directory
+as the pylintrc file.
