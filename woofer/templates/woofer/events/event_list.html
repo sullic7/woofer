@@ -1,4 +1,5 @@
 {% extends 'woofer/pageframe.html' %}
+{% load subtract_filter %}
 
 {% block page_title %}Event List{% endblock %}
 
@@ -29,6 +30,8 @@ window.onload = function () {
         <button class="sort" data-sort="name">Sort by name</button>
         <button class="sort" data-sort="start_day">Sort by start day</button>
         <button class="sort" data-sort="start_time">Sort by start time</button>
+        <button class="sort" data-sort="remaining_slots">Sort by remaining slots</button>
+        <button class="sort" data-sort="attendance_cap">Sort by total slots</button>
       <table>
         <thead>
           <tr>
@@ -37,7 +40,8 @@ window.onload = function () {
             <th>Time</th>
             <th>Duration</th>
             <th>City</th>
-            <th>Attendance</th>
+            <th>Remaining Slots</th>
+            <th>Attendance Cap</th>
             <th>Activity</th>
             <th>Location</th>
           </tr>
@@ -50,7 +54,8 @@ window.onload = function () {
               <td class="start_time">{{ event.get_formatted_time }}</td>
               <td class="duration">{{ event.duration }}</td>
               <td class="city">{{ event.city }}</td>
-              <td class="attendance">{{ event.eventattendance__count }} / {{ event.attendance_cap }}</td>
+              <td class="remaining_slots">{{  event.attendance_cap|subtract:event.eventattendance__count }}</td>
+              <td class="attendance_cap">{{ event.attendance_cap }}</td>
               <td class="activity">{{ event.get_activity_display }}</td>
               <td class="location">{{ event.get_location_display }}</td>
               <!-- View button -->
