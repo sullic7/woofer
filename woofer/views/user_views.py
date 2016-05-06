@@ -56,6 +56,10 @@ def create_user(request):
             new_profile = Profile()
             new_profile.user = new_user
             new_profile.save()
+            # Get the user object we just created
+            new_user = authenticate(username=form.cleaned_data['username'],
+                                    password=form.cleaned_data['password1'])
+            login(request, new_user)
             return HttpResponseRedirect('/index')
     else:
         form = UserCreationForm()
