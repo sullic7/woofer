@@ -37,6 +37,7 @@ class Dog(models.Model):
     breed = models.CharField(max_length=100, blank=True, null=True)
     potty_trained = models.BooleanField()
     bio = models.TextField(blank=True, null=True)
+
     LOW = 'LO'
     MEDIUM = 'MD'
     HIGH = 'HI'
@@ -50,11 +51,12 @@ class Dog(models.Model):
         (MEDIUM, 'Good with small groups'),
         (HIGH, 'Good with any size groups')
         )
+
     activity = models.CharField(max_length=2, choices=ACTIVITY_CHOICES)
     temperament_kids = models.CharField(max_length=2, choices=TEMPERAMENT_CHOICES)
     temperament_dogs = models.CharField(max_length=2, choices=TEMPERAMENT_CHOICES)
     temperament_strangers = models.CharField(max_length=2, choices=TEMPERAMENT_CHOICES)
-    # add photo
+
     def __str__(self):
         """ This method is used to provide a string represenation for the
         Django admin interface.
